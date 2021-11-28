@@ -6,9 +6,9 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/productlist', function(req, res, next) {
+/*router.get('/productlist', function(req, res, next) {
   res.render('productlist', { title: 'productlist' });
-});
+});*/
 
 router.get('/productedit', function(req, res, next) {
   res.render('productedit', { title: 'productedit' });
