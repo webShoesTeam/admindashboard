@@ -1,3 +1,3 @@
 const Product = require('../../models/productModel');
 
-exports.list = () => Product.find({});
+exports.list = () => Product.find({}).lean();
