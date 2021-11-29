@@ -1,6 +1,18 @@
 const productListService = require('./productListService');
+const Product = require("../../models/productModel");
 
 exports.list = async function(req, res) {
     const products = await productListService.list();
     res.render('productList/productlist', {products});
+};
+
+exports.delete = async function(req, res) {
+    const id = req.params.id;
+
+    Product.findByIdAndDelete(id)
+        .then(result => {
+            res.redirect('/productlist');
+        })
+        .catch(err => console.log(err));
+
 };

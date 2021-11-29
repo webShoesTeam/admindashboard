@@ -5,7 +5,7 @@
                         <div class="product-status-wrap">
                             <h4>Products List</h4>
                             <div class="add-product">
-                                <a href="product-edit.html">Add Product</a>
+                                <a href="productadd">Add Product</a>
                             </div>
                             <table>
                                 <tr>
@@ -28,13 +28,16 @@
                                     <td>{{this.size}}</td>
                                     <td>{{this.color}}</td>
                                     <td>
-                                        <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                        <button data-toggle="tooltip" title="Edit" class="edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+<!--                                        <button data-toggle="tooltip" title="Delete" class="delete" data-doc="{{this._id}}"><i class="fa fatrash--o" aria-hidden="true"></i></button>-->
+                                        <a data-toggle="tooltip" title="Delete" class="delete" href="/productlist/{{this._id}}">delete<i class="fa fatrash--o" aria-hidden="true"></i></a>
                                     </td>
+
                                 </tr>
                                 {{/each}}
-
                             </table>
+
+<!--
 
                             <div class="custom-pagination">
 								<ul class="pagination">

@@ -13,6 +13,11 @@ router.get('/', function(req, res, next) {
 router.get('/productedit', function(req, res, next) {
   res.render('productedit', { title: 'productedit' });
 });
+
+router.get('/productadd', function(req, res, next) {
+  res.render('productadd', { title: 'productadd' });
+});
+
 router.get('/productdetail', function(req, res, next) {
   res.render('productdetail', { title: 'productdetail' });
 });
