@@ -25,3 +25,13 @@ exports.add = async function(req, res) {
     })
         .catch(err => console.log(err));
 };
+
+exports.edit = function(req, res) {
+    // const id = req.params.id;
+    res.render('productedit');
+    // Product.findById(id)
+    //     .then(result => {
+    //         res.render('productedit', {product: result});
+    //     })
+    //     .catch(err => console.log(err));
+};

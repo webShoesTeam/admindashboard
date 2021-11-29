@@ -5,8 +5,9 @@ const productListController = require('./productListController');
 
 router.get('/', productListController.list);
 router.get('/:id', productListController.delete);
-
-
 router.post('/add', productListController.add);
+
+router.get('/edit/:id', productListController.edit);
+
 
 module.exports = router;
