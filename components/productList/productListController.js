@@ -14,5 +14,14 @@ exports.delete = async function(req, res) {
             res.redirect('/productlist');
         })
         .catch(err => console.log(err));
+};
 
+exports.add = async function(req, res) {
+    const product = new Product(req.body);
+
+    product.save()
+        .then((result) => {
+            res.redirect('/productlist');
+    })
+        .catch(err => console.log(err));
 };
