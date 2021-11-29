@@ -7,8 +7,8 @@ router.get('/', productListController.list);
 router.get('/:id', productListController.delete);
 
 
-// router.post('/', (req, res) => {
-//     console.log(req.body);
-// })
+router.post('/add', (req, res) => {
+    console.log(req.body);
+})
 
 module.exports = router;
