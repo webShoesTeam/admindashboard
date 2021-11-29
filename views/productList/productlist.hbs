@@ -28,9 +28,10 @@
                                     <td>{{this.size}}</td>
                                     <td>{{this.color}}</td>
                                     <td>
-                                        <button data-toggle="tooltip" title="Edit" class="edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+<!--                                        <button data-toggle="tooltip" title="Edit" class="edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>-->
 <!--                                        <button data-toggle="tooltip" title="Delete" class="delete" data-doc="{{this._id}}"><i class="fa fatrash--o" aria-hidden="true"></i></button>-->
-                                        <a data-toggle="tooltip" title="Delete" class="delete" href="/productlist/{{this._id}}">delete</a>
+                                        <a data-toggle="tooltip" title="Edit" class="edit" href="/productlist/edit/{{this._id}}">Edit</a>
+                                        <a data-toggle="tooltip" title="Delete" class="delete" href="/productlist/{{this._id}}">Delete</a>
                                     </td>
 
                                 </tr>
