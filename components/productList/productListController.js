@@ -12,8 +12,15 @@ cloudinary.config({
   });
 
 exports.list = async function(req, res) {
-    const products = await productListService.list();
-    res.render('productList/productlist', {products});
+    const perPage = 6;
+    const page = req.params.page || 1;
+    const count = await productListService.count();
+    const products = await productListService.list(page,perPage);
+    res.render('productList/productlist', {
+        products,
+        current: page,
+        pages: Math.ceil(count / perPage)
+      });
 };
 
 exports.delete = async function(req, res) {

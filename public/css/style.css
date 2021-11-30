@@ -1257,6 +1257,10 @@ ul.two-part-sp li{
 .custom-pagination ul.pagination{
 	margin-bottom: 0px;
 }
+.active, .custom-pagination:hover {
+    color: white;
+  }
+
 .product-status-wrap .pd-setting {
     border: none;
     color: #fff;

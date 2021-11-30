@@ -31,7 +31,7 @@
 <!--                                        <button data-toggle="tooltip" title="Edit" class="edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>-->
 <!--                                        <button data-toggle="tooltip" title="Delete" class="delete" data-doc="{{this._id}}"><i class="fa fatrash--o" aria-hidden="true"></i></button>-->
                                         <a data-toggle="tooltip" title="Edit" class="edit" href="/productlist/edit/{{this._id}}">Edit</a>
-                                        <a data-toggle="tooltip" title="Delete" class="delete" href="/productlist/{{this._id}}">Delete</a>
+                                        <a data-toggle="tooltip" title="Delete" class="delete" href="/productlist/delete/{{this._id}}">Delete</a>
                                     </td>
 
                                 </tr>
@@ -39,13 +39,67 @@
                             </table>
 
                             <div class="custom-pagination">
-								<ul class="pagination">
-									<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
-									<li class="page-item"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item"><a class="page-link" href="#">Next</a></li>
+								<ul class="pagination" id="listpage">
 								</ul>
+                                <script>
+                                    var uList = document.getElementById("listpage");
+                                    var numPage = 3;
+                                    var i = 1;  
+                                    var tagLi = document.createElement("li");
+                                    var link = document.createElement("a");
+                                    if({{current}} == null){
+                                    {{current}} == 1
+                                    }
+                                    //
+                                    if({{current}} >= 3){
+                                    i = {{current}} - 2;
+                                    }
+
+                                    // <
+                                    if({{current}} == 1){
+                                    link.href  = "#";
+                                    link.textContent = "Previous";
+                                    }
+                                    else{
+                                    var s = {{current}} - 1
+                                    link.href  = "/productlist/" + s;
+                                    link.textContent = "Previous";
+                                    }
+                                    tagLi.appendChild(link);
+                                    uList.appendChild(tagLi);
+
+                                    //center
+                                    
+                                    for(;i <= {{current}} + 2 && i <= {{pages}};i++){
+                                    tagLi = document.createElement("li");
+                                    link = document.createElement("a");
+                                    if(i == {{current}}){
+                                    tagLi.classList.add('active')
+                                    link = document.createElement("span");
+                                    link.textContent = i;
+                                    }
+                                    else{
+                                    link.href = "/productlist/" + i;
+                                    link.textContent = i;
+                                    }
+                                    tagLi.appendChild(link);
+                                    uList.appendChild(tagLi); 
+                                    }
+                                    // >
+                                    tagLi = document.createElement("li");
+                                    link = document.createElement("a");
+                                    if ({{current}} == {{pages}}) {
+                                        link.href  = "#";
+                                        link.textContent = "Next";
+                                    }
+                                    else{
+                                        var s = {{current}} + 1
+                                        link.href  = "/productlist/" + s;
+                                        link.textContent = "Next";
+                                    }
+                                    tagLi.appendChild(link);
+                                    uList.appendChild(tagLi); 
+                                </script>
                             </div>
                         </div>
                     </div>
