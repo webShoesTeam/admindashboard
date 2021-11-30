@@ -62,9 +62,10 @@ exports.edit = function(req, res) {
 
 exports.update = async function(req, res) {
     const id = req.params.id;
-
+    
     Product.findByIdAndUpdate(id, req.body)
         .then((result) => {
+           //cloudinary.uploader.upload(files.image.filepath, { public_id: `images/${result._id}/${result.nameImage}` });
             res.redirect('/productlist');
         })
         .catch(err => console.log(err));
