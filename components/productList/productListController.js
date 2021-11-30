@@ -22,7 +22,7 @@ exports.delete = async function(req, res) {
     Product.findByIdAndDelete(id)
         .then(result => {
             cloudinary.uploader.destroy(`images/${result._id}/${result.nameImage}`,function(){
-                cloudinary.api.delete_folder(`images/${result._id}`, console.log);
+                cloudinary.api.delete_folder(`images/${result._id}`);
             })
             res.redirect('/productlist');
         })
