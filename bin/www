@@ -8,7 +8,7 @@ require('dotenv').config()
 const mongoose = require('mongoose');
 
 // connect to mongodb
-const dbURI = "mongodb+srv://shoes:shoes@myshoes.go3l3.mongodb.net/shoes?retryWrites=true&w=majority";
+const dbURI = process.env.DATABASE_STRING;
 
 //connect to mongoDB
 mongoose.connect(dbURI, {
