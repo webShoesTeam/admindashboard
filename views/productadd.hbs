@@ -11,7 +11,7 @@
                         <div id="myTabContent" class="tab-content custom-product-edit">
                             <div class="product-tab-list tab-pane fade active in" id="description">
 
-                                <form action="/productlist/add" method="POST">
+                                <form action="/productlist/add" enctype="multipart/form-data" method="POST">
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                             <div class="review-content-section">
@@ -54,7 +54,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="row">
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <label for="">Image</label>
@@ -90,6 +89,7 @@
 <script>    
     function readURL(input) {
         console.log("start read url")
+        console.log(input.files[0])
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             
