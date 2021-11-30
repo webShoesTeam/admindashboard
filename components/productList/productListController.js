@@ -27,11 +27,22 @@ exports.add = async function(req, res) {
 };
 
 exports.edit = function(req, res) {
-    // const id = req.params.id;
-    res.render('productedit');
-    // Product.findById(id)
-    //     .then(result => {
-    //         res.render('productedit', {product: result});
-    //     })
-    //     .catch(err => console.log(err));
+    const id = req.params.id;
+
+    Product.findById(id)
+        .then(result => {
+            console.log(result);
+            res.render('productedit', {product: result});
+        })
+        .catch(err => console.log(err));
+};
+
+exports.update = async function(req, res) {
+    const id = req.params.id;
+
+    Product.findByIdAndUpdate(id, req.body)
+        .then((result) => {
+            res.redirect('/productlist');
+        })
+        .catch(err => console.log(err));
 };
