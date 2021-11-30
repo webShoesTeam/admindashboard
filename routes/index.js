@@ -10,9 +10,9 @@ router.get('/', function(req, res, next) {
   res.render('productlist', { title: 'productlist' });
 });*/
 
-router.get('/productedit', function(req, res, next) {
-  res.render('productedit', { title: 'productedit' });
-});
+// router.get('/productedit', function(req, res, next) {
+//   res.render('productedit', { title: 'productedit' });
+// });
 
 router.get('/productadd', function(req, res, next) {
   res.render('productadd', { title: 'productadd' });
