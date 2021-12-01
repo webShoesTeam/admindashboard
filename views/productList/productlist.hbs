@@ -5,7 +5,7 @@
                         <div class="product-status-wrap">
                             <h4>Products List</h4>
                             <div class="add-product">
-                                <a href="productadd">Add Product</a>
+                                <a href="/productadd">Add Product</a>
                             </div>
                             <table>
                                 <tr>
@@ -20,7 +20,7 @@
                                 </tr>
                                 {{#each products}}
                                 <tr>
-                                    <td><img src="https://res.cloudinary.com/dgci6plhk/image/upload/v1638259721/images/{{this._id}}/{{this.nameImage}}" alt="" /></td>
+                                    <td><img src="https://res.cloudinary.com/dgci6plhk/image/upload/images/{{this._id}}/{{this.nameImage}}.jpg" alt="" /></td>
                                     <td> {{this.name}} </td>
                                     <td>{{this.detail}}</td>
                                     <td>{{this.category}}</td>

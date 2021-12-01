@@ -41,6 +41,7 @@ exports.add = async function(req, res) {
 
     form.parse(req,(err,fields,files)=>{
         product = new Product(fields);
+
         product.save()
         .then((result) => {
             cloudinary.uploader.upload(files.image.filepath, { public_id: `images/${result._id}/${result.nameImage}`,width: 479, height: 340, crop: "scale"})
@@ -63,12 +64,31 @@ exports.edit = function(req, res) {
 exports.update = async function(req, res) {
     const id = req.params.id;
     form.parse(req,(err,fields,files)=>{
-        console.log(fields)
+        // Product.findById(id)
+        // .then(result => {
+        //     console.log(result.nameImage)
+        //     newName = Number(result.nameImage) + 1;
+        //     fields.nameImage =  newName.toString();
+
+        //     Product.findByIdAndUpdate(id, fields)
+        //     .then((result) => {
+                
+        //         cloudinary.uploader.upload(files.image.filepath, { public_id: `images/${result._id}/${result.nameImage}`,width: 479, height: 340, crop: "scale"})
+        //         res.redirect('/productlist');
+        //     })
+        //     .catch(err => console.log(err));
+        // })
+        // .catch(err => console.log(err));
+
         Product.findByIdAndUpdate(id, fields)
         .then((result) => {
+            
             cloudinary.uploader.upload(files.image.filepath, { public_id: `images/${result._id}/${result.nameImage}`,width: 479, height: 340, crop: "scale"})
             res.redirect('/productlist');
         })
         .catch(err => console.log(err));
+
+        
+
     })
 };
