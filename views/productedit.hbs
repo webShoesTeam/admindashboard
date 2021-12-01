@@ -13,7 +13,7 @@
                                 <div id="myTabContent" class="tab-content custom-product-edit">
                                     <div class="product-tab-list tab-pane fade active in" id="description">
 
-                                        <form action="/productlist/update/{{product._id}}" method="POST">
+                                        <form action="/productlist/update/{{product._id}}"  enctype="multipart/form-data" method="POST">
 
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -30,14 +30,14 @@
                                                         <span class="input-group-addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
                                                         <input type="text" class="form-control" value="{{product.price}}" name="price" required>
                                                     </div>
-                                                    <div class="input-group mg-b-pro-edt">
+                                                    {{!-- <div class="input-group mg-b-pro-edt">
                                                         <span class="input-group-addon"><i class="icon nalika-new-file" aria-hidden="true"></i></span>
                                                         <input type="text" class="form-control" value="{{product.nameImage}}" name="nameImage">
                                                     </div>
-<!--                                                    <div class="input-group mg-b-pro-edt">-->
-<!--                                                        <span class="input-group-addon"><i class="icon nalika-favorites" aria-hidden="true"></i></span>-->
-<!--                                                        <input type="text" class="form-control" placeholder="Quantity">-->
-<!--                                                    </div>-->
+                                                   <div class="input-group mg-b-pro-edt">
+                                                        <span class="input-group-addon"><i class="icon nalika-favorites" aria-hidden="true"></i></span>
+                                                       <input type="text" class="form-control" placeholder="Quantity">
+                                                   </div> --}}
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

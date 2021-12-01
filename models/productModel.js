@@ -24,7 +24,8 @@ const productSchema = mongoose.Schema({
     required: true
   },
   nameImage: {
-    type: String
+    type: String,
+    default: '1'
   },
   size: {
     type: String
