@@ -7,3 +7,7 @@ exports.logout = (req, res) => {
    req.logout();
    res.redirect('/login');
 }
+
+exports.registerpage = (req, res) => {
+    res.render('register');
+ }
