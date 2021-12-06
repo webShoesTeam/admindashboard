@@ -1,4 +1,4 @@
-const Admin = require("../../models/adminModel");
+const userService = require('./userService');
 
 
 exports.login = (req, res) => {
@@ -15,12 +15,8 @@ exports.registerpage = (req, res) => {
     res.render('register');
  }
 
- exports.register = (req, res) => {
-    const admin = new Admin(req.body);
-
-    admin.save()
-    .then((result) => {
-        res.redirect('/');
-    })
-    .catch(err => console.log(err));
+ exports.register = async (req, res) => {
+    const { username, password, phone, address, email } =  req.body;
+    const admin = await userService.register(username, password, phone, address, email);
+    res.redirect('/');
 }
