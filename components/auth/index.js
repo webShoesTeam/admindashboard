@@ -7,6 +7,7 @@ router.get('/login', authController.login);
 router.post('/login',  passport.authenticate('local', { successRedirect: '/',
 failureRedirect: '/login?wrong-password'}));
 
+router.get('/logout', authController.logout);
 
 
 module.exports = router;
