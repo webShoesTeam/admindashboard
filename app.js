@@ -32,6 +32,11 @@ app.use(session({ secret: process.env.SESSION_SECRET }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(function(req, res, next){
+  res.locals.user = req.user;
+  next();
+})
+
 app.use('/', index);
 app.use('/users', users);
 
