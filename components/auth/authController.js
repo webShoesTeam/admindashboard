@@ -1,3 +1,4 @@
 exports.login = (req, res) => {
-    res.render('login');
+    const wrongPassword = req.query['wrong-password'] !== undefined;
+    res.render('login', {wrongPassword});
 }

@@ -100,7 +100,9 @@
                             <div class="checkbox login-checkbox">
                                 <label>
 										<input type="checkbox" class="i-checks"> Remember me </label>
-                                <p class="help-block small">(if this is a private computer)</p>
+                                {{#if wrongPassword}}
+                                <p class="help-block small" style="color:red">Username or password is incorrect!</p>
+                                {{/if}}
                             </div>
                             <button type="submit" class="btn btn-success btn-block loginbtn">Login</button>
                             <a class="btn btn-default btn-block" href="/users/register">Register</a>
