@@ -10,7 +10,7 @@ failureRedirect: '/login?wrong-password'}));
 router.get('/logout', authController.logout);
 
 router.get('/register', authController.registerpage);
-// router.post('/register', authController.register);
+router.post('/register', authController.register);
 
 
 module.exports = router;
