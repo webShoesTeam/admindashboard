@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 // const validator = require('validator');
 
-const userSchema = mongoose.Schema({
+const adminSchema = mongoose.Schema({
   name: {
     type: String,
     trim: true,
@@ -32,19 +32,8 @@ const userSchema = mongoose.Schema({
     type: String,
     default: ''
   },
-  cart: [
-    {
-      product: {
-        type: mongoose.Schema.ObjectId,
-      },
-      quantity: {
-        type: Number,
-        default: 1
-      }
-    }
-  ]
 });
 
-const User = mongoose.model('User', userSchema);
+const Admin = mongoose.model('Admin', adminSchema);
 
-module.exports = User;
+module.exports = Admin;
