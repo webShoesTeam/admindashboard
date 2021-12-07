@@ -3,7 +3,10 @@ const userService = require('./userService');
 
 exports.login = (req, res) => {
     const wrongPassword = req.query['wrong-password'] !== undefined;
-    res.render('login', {wrongPassword});
+    res.render('login', {
+        wrongPassword,
+        layout: false,
+    });
 }
 
 exports.logout = (req, res) => {
