@@ -72,8 +72,10 @@
             </div>
 			<div class="nalika-profile">
 				<div class="profile-dtl">
-					<a href="#"><img src="/img/notification/4.jpg" alt="" /></a>
-					<h2>Lakian <span class="min-dtn">Das</span></h2>
+					{{!-- <a href="/users/profile"><img src="/img/notification/4.jpg" alt="" /></a> --}}
+					<a href="/users/profile"><img src="{{user.image}}" alt="avt"  /></a>
+
+					<h2><span class="min-dtn">{{user.name}}</span></h2>
 				</div>
 				{{!-- <div class="profile-social-dtl">
 					<ul class="dtl-social">
@@ -357,10 +359,9 @@
                             <i class="icon nalika-down-arrow nalika-angle-dw nalika-icon"></i>
                           </a>
                                                   <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                      <li><a href="/users/register"><span class="icon nalika-home author-log-ic"></span> Register</a>
-                                                      </li>
-                                                      <li><a href="#profile"><span class="icon nalika-user author-log-ic"></span> My Profile</a>
-                                                      </li>
+
+                                                      
+                                                      <li><a href="/users/profile"><span class="icon nalika-user author-log-ic"></span> My Profile</a></li>
                                                       {{!-- <li><a href="lock.html"><span class="icon nalika-diamond author-log-ic"></span> Lock</a>
                                                       </li> --}}
                                                       {{!-- <li><a href="#"><span class="icon nalika-settings author-log-ic"></span> Settings</a>

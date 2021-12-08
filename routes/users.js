@@ -1,30 +1,21 @@
 var express = require('express');
 var router = express.Router();
 
+const userController = require("../components/user/userController")
+const authGuard = require('../middlewares/loggedInUserGuard');
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
 
-router.get('/register', function(req, res, next) {
-  res.render('register', {
-    title: "Register",
-    layout: false
-  })
-});
 
-router.get('/login', function(req, res, next) {
-  res.render('login', {
-    title: "Login",
-    layout: false
-  })
-});
 
-router.get('/logout', function(req, res, next) {
-  res.render('login', {
-    title: "Login",
-    layout: false
-  })
-});
+
+
+router.get('/profile', authGuard.hasLogin, userController.getProfile);
+
+
+router.post('/update_avt/:id', authGuard.hasLogin, userController.updateImage);
+
+router.post('/save/:id', authGuard.hasLogin, userController.saveUpdate);
+
+
 
 module.exports = router;
