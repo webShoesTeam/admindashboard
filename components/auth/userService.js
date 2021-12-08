@@ -7,17 +7,17 @@ exports.findByUsername = (username) => {
     }).lean();
 }
 
-exports.validPassword = (password, user) => {
-    // const passwordHash = bcrypt.hash(password, 10);
-    return user.password === password;
+exports.validPassword = async (password, user) => {
+    const passwordHash = await bcrypt.hash(password, 10);
+    return user.password === passwordHash;
 }
 
 exports.register = async (name, username, password, phone, address, email) => {
-    // const passwordHash = await bcrypt.hash(password, 10);
+    const passwordHash = await bcrypt.hash(password, 10);
     return Admin.create({
         name: name,
         username: username,
-        password: password,
+        password: passwordHash,
         phone: phone,
         address: address,
         email: email
