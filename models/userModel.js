@@ -24,10 +24,6 @@ const userSchema = mongoose.Schema({
     type: String,
     require: [true, 'Please provide a password.']
   },
-  role: {
-    type: String,
-    default: 'user'
-  },
   phone:{
     type: String,
     default: ''
@@ -49,6 +45,6 @@ const userSchema = mongoose.Schema({
   ]
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema, "user");
 
 module.exports = User;

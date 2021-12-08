@@ -4,6 +4,7 @@ const Product = require("../../models/productModel");
 
 const cloudinary = require('cloudinary').v2;
 const formidable = require('formidable');
+const form = formidable();
 
 cloudinary.config({ 
     cloud_name: process.env.CLOUD_NAME, 
@@ -37,12 +38,13 @@ exports.delete = async function(req, res) {
 };
 
 exports.add = async function(req, res) {
-    const form = formidable();
+
     form.parse(req,(err,fields,files)=>{
         product = new Product(fields);
+
         product.save()
         .then((result) => {
-            cloudinary.uploader.upload(files.image.filepath, { public_id: `images/${result._id}/${result.nameImage}` })
+            cloudinary.uploader.upload(files.image.filepath, { public_id: `images/${result._id}/${result.nameImage}`,width: 479, height: 340, crop: "scale"})
             res.redirect('/productlist');
         })
         .catch(err => console.log(err));
@@ -54,7 +56,6 @@ exports.edit = function(req, res) {
 
     Product.findById(id)
         .then(result => {
-            console.log(result);
             res.render('productedit', {product: result});
         })
         .catch(err => console.log(err));
@@ -62,11 +63,32 @@ exports.edit = function(req, res) {
 
 exports.update = async function(req, res) {
     const id = req.params.id;
-    
-    Product.findByIdAndUpdate(id, req.body)
+    form.parse(req,(err,fields,files)=>{
+        // Product.findById(id)
+        // .then(result => {
+        //     console.log(result.nameImage)
+        //     newName = Number(result.nameImage) + 1;
+        //     fields.nameImage =  newName.toString();
+
+        //     Product.findByIdAndUpdate(id, fields)
+        //     .then((result) => {
+                
+        //         cloudinary.uploader.upload(files.image.filepath, { public_id: `images/${result._id}/${result.nameImage}`,width: 479, height: 340, crop: "scale"})
+        //         res.redirect('/productlist');
+        //     })
+        //     .catch(err => console.log(err));
+        // })
+        // .catch(err => console.log(err));
+
+        Product.findByIdAndUpdate(id, fields)
         .then((result) => {
-           //cloudinary.uploader.upload(files.image.filepath, { public_id: `images/${result._id}/${result.nameImage}` });
+            
+            cloudinary.uploader.upload(files.image.filepath, { public_id: `images/${result._id}/${result.nameImage}`,width: 479, height: 340, crop: "scale"})
             res.redirect('/productlist');
         })
         .catch(err => console.log(err));
+
+        
+
+    })
 };

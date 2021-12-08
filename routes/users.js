@@ -9,6 +9,7 @@ const authGuard = require('../middlewares/loggedInUserGuard');
 
 
 
+
 router.get('/profile', authGuard.hasLogin, userController.getProfile);
 
 
