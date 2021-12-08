@@ -19,7 +19,7 @@ exports.registerpage = (req, res) => {
  }
 
  exports.register = async (req, res) => {
-    const { username, password, phone, address, email } =  req.body;
-    const admin = await userService.register(username, password, phone, address, email);
+    const { name, username, password, phone, address, email } =  req.body;
+    const admin = await userService.register(name, username, password, phone, address, email);
     res.redirect('/');
 }
