@@ -39,13 +39,13 @@ app.use(function(req, res, next){
   next();
 })
 
-
-app.use('/', index);
+app.use('/', authRouter);
+app.use('/', loggedInUserGuard.hasLogin, index);
 app.use('/users', users);
 
-app.use('/', authRouter);
-app.use('/productlist', productListRouter);
-app.use('/accountlist', adminListRouter);
+
+app.use('/productlist', loggedInUserGuard.hasLogin, productListRouter);
+app.use('/accountlist', loggedInUserGuard.hasLogin, adminListRouter);
 
 
 // catch 404 and forward to error handler

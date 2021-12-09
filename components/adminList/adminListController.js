@@ -5,7 +5,7 @@ const formidable = require('formidable');
 const form = formidable();
 
 exports.list = async function(req, res) {
-    const perPage = 6;
+    const perPage = 3;
     const page = req.params.page || 1;
     const count = await adminListService.count();
     const admins = await adminListService.list(page,perPage);
