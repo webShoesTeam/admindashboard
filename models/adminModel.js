@@ -32,6 +32,12 @@ const adminSchema = mongoose.Schema({
     type: String,
     default: ''
   },
+
+  image: {
+    type: String,
+    default: 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png',
+  },
+
 });
 
 const Admin = mongoose.model('Admin', adminSchema, "admin");
