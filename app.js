@@ -14,7 +14,7 @@ const adminRouter = require('./components/admin/index');
 const customerRouter = require('./components/customer/index');
 const authRouter = require('./components/auth/index');
 const loggedInUserGuard = require('./middlewares/loggedInUserGuard');
-
+const billRouter = require('./components/bill/billRouter');
 //const { session } = require('passport');
 const passport = require('passport');
 
@@ -48,7 +48,7 @@ app.use('/users', users);
 app.use('/productlist', loggedInUserGuard.hasLogin, productListRouter);
 app.use('/admin', loggedInUserGuard.hasLogin, adminRouter);
 app.use('/customer', loggedInUserGuard.hasLogin, customerRouter);
-
+app.use('/bill', loggedInUserGuard.hasLogin, billRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
