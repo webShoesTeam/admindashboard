@@ -21,13 +21,11 @@ if(current == 1){
 }
 else{
     var s = current  - 1
-    link.href  = "/accountlist/" + s;
+    link.href  = "/customer/" + s;
     link.textContent = "Previous";
 }
 tagLi.appendChild(link);
 uList.appendChild(tagLi);
-
-console.log(current,pages)
 //center
 for(;i <= current  + 2 && i <= pages;i++){
     tagLi = document.createElement("li");
@@ -38,7 +36,7 @@ for(;i <= current  + 2 && i <= pages;i++){
         link.textContent = i;
     }
     else{
-        link.href = "/accountlist/" + i;
+        link.href = "/customer/" + i;
         link.textContent = i;
     }
     tagLi.appendChild(link);
@@ -54,7 +52,7 @@ if (current == pages) {
 }
 else{
     var s = current + 1
-    link.href  = "/accountlist/" + s;
+    link.href  = "/customer/" + s;
     link.textContent = "Next";
 }
 tagLi.appendChild(link);
