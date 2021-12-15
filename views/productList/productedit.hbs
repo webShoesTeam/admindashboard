@@ -1,104 +1,124 @@
-       <div class="single-product-tab-area mg-b-30">
-            <!-- Single pro tab review Start-->
-            <div class="single-pro-review-area">
-                <div class="container-fluid">
+<div class="breadcome-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcome-list">
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="review-tab-pro-inner">
-                                <ul id="myTab3" class="tab-review-design">
-                                    <li class="active"><a href="#description"><i class="icon nalika-edit" aria-hidden="true"></i> Product Edit</a></li>
-                                    {{!-- <li><a href="#reviews"><i class="icon nalika-picture" aria-hidden="true"></i> Pictures</a></li>
-                                    <li><a href="#INFORMATION"><i class="icon nalika-chat" aria-hidden="true"></i> Review</a></li> --}}
-                                </ul>
-                                <div id="myTabContent" class="tab-content custom-product-edit">
-                                    <div class="product-tab-list tab-pane fade active in" id="description">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="breadcomb-wp">
+                                <div class="breadcomb-ctn">
+                                <h2>Product Edit</h2>
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                                        <form action="/productlist/update/{{product._id}}"  enctype="multipart/form-data" method="POST">
+<div class="single-product-tab-area mg-b-30">
+    <!-- Single pro tab review Start-->
+    <div class="single-pro-review-area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="review-tab-pro-inner">
+                        <ul id="myTab3" class="tab-review-design">
+                            <li class="active"><a href="#description"><i class="icon nalika-edit" aria-hidden="true"></i> Product Edit</a></li>
+                            {{!-- <li><a href="#reviews"><i class="icon nalika-picture" aria-hidden="true"></i> Pictures</a></li>
+                            <li><a href="#INFORMATION"><i class="icon nalika-chat" aria-hidden="true"></i> Review</a></li> --}}
+                        </ul>
+                        <div id="myTabContent" class="tab-content custom-product-edit">
+                            <div class="product-tab-list tab-pane fade active in" id="description">
 
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                <div class="review-content-section">
-                                                    <div class="input-group mg-b-pro-edt">
-                                                        <span class="input-group-addon"><i class="icon nalika-user" aria-hidden="true"></i></span>
-                                                        <input type="text" class="form-control" value="{{product.name}}" name="name" required>
-                                                    </div>
-                                                    <div class="input-group mg-b-pro-edt">
-                                                        <span class="input-group-addon"><i class="icon nalika-edit" aria-hidden="true"></i></span>
-                                                        <input type="text" class="form-control" value="{{product.detail}}" name="detail" required>
-                                                    </div>
-                                                    <div class="input-group mg-b-pro-edt">
-                                                        <span class="input-group-addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
-                                                        <input type="text" class="form-control" value="{{product.price}}" name="price" required>
-                                                    </div>
-                                                    {{!-- <div class="input-group mg-b-pro-edt">
-                                                        <span class="input-group-addon"><i class="icon nalika-new-file" aria-hidden="true"></i></span>
-                                                        <input type="text" class="form-control" value="{{product.nameImage}}" name="nameImage">
-                                                    </div>
-                                                   <div class="input-group mg-b-pro-edt">
-                                                        <span class="input-group-addon"><i class="icon nalika-favorites" aria-hidden="true"></i></span>
-                                                       <input type="text" class="form-control" placeholder="Quantity">
-                                                   </div> --}}
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                <div class="review-content-section">
-                                                    <div class="input-group mg-b-pro-edt">
-                                                        <span class="input-group-addon"><i class="icon nalika-user" aria-hidden="true"></i></span>
-                                                        {{!-- <input type="text" class="form-control" value="{{product.size}}" name="size" required> --}}
-                                                        <select class="form-control custom-select-value" name="size" required>
-                                                            <option value="" disabled selected>Size: {{product.size}}</option>
-                                                            <option>Small</option>
-                                                            <option>Medium</option>
-                                                            <option>Large</option>
-                                                            <option>Extra Large</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="input-group mg-b-pro-edt">
-                                                        <span class="input-group-addon"><i class="icon nalika-favorites-button" aria-hidden="true"></i></span>
-                                                        <input type="text" class="form-control" value="{{product.color}}" name="color" required>
-                                                    </div>
-<!--                                                    <div class="input-group mg-b-pro-edt">-->
-<!--                                                        <span class="input-group-addon"><i class="fa fa-usd" aria-hidden="true"></i></span>-->
-<!--                                                        <input type="text" class="form-control" placeholder="Sale Price">-->
-<!--                                                    </div>-->
-                                                    <div class="input-group mg-b-pro-edt">
-                                                        <span class="input-group-addon"><i class="icon nalika-like" aria-hidden="true"></i></span>
-                                                        {{!-- <input type="text" class="form-control" value="{{product.category}}" name="category" required> --}}
-                                                        <select class="form-control custom-select-value" name="category" required>
-                                                            <option value="" disabled selected>Category: {{product.category}}</option>
-                                                            <option>Men</option>
-                                                            <option>Women</option>
-                                                            <option>Kid</option>                                                        
-                                                        </select>
-                                                    </div>
+                                <form action="/productlist/update/{{product._id}}"  enctype="multipart/form-data" method="POST">
 
-                                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="review-content-section">
+                                            <div class="input-group mg-b-pro-edt">
+                                                <span class="input-group-addon"><i class="icon nalika-user" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" value="{{product.name}}" name="name" required>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <label for="">Image</label>
-                                                <input type="file" class="form-control" name="image" id="img">
-                                                <img src="https://res.cloudinary.com/dgci6plhk/image/upload/images/{{product._id}}/{{product.nameImage}}.jpg" id="imgPreview" alt="">
+                                            <div class="input-group mg-b-pro-edt">
+                                                <span class="input-group-addon"><i class="icon nalika-edit" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" value="{{product.detail}}" name="detail" required>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <div class="text-center custom-pro-edt-ds">
-                                                    <button type="submit" class="btn btn-ctl-bt waves-effect waves-light m-r-10">Update
-														</button>
-                                                </div>
+                                            <div class="input-group mg-b-pro-edt">
+                                                <span class="input-group-addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" value="{{product.price}}" name="price" required>
                                             </div>
+                                            {{!-- <div class="input-group mg-b-pro-edt">
+                                                <span class="input-group-addon"><i class="icon nalika-new-file" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" value="{{product.nameImage}}" name="nameImage">
+                                            </div>
+                                            <div class="input-group mg-b-pro-edt">
+                                                <span class="input-group-addon"><i class="icon nalika-favorites" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" placeholder="Quantity">
+                                            </div> --}}
                                         </div>
-                                        </form>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="review-content-section">
+                                            <div class="input-group mg-b-pro-edt">
+                                                <span class="input-group-addon"><i class="icon nalika-user" aria-hidden="true"></i></span>
+                                                {{!-- <input type="text" class="form-control" value="{{product.size}}" name="size" required> --}}
+                                                <select class="form-control custom-select-value" name="size" required>
+                                                    <option value="" disabled selected>Size: {{product.size}}</option>
+                                                    <option>Small</option>
+                                                    <option>Medium</option>
+                                                    <option>Large</option>
+                                                    <option>Extra Large</option>
+                                                </select>
+                                            </div>
+                                            <div class="input-group mg-b-pro-edt">
+                                                <span class="input-group-addon"><i class="icon nalika-favorites-button" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" value="{{product.color}}" name="color" required>
+                                            </div>
+                                            {{!-- <div class="input-group mg-b-pro-edt">
+                                                <span class="input-group-addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
+                                                <input type="text" class="form-control" placeholder="Sale Price">
+                                            </div> --}}
+                                            <div class="input-group mg-b-pro-edt">
+                                                <span class="input-group-addon"><i class="icon nalika-like" aria-hidden="true"></i></span>
+                                                {{!-- <input type="text" class="form-control" value="{{product.category}}" name="category" required> --}}
+                                                <select class="form-control custom-select-value" name="category" required>
+                                                    <option value="" disabled selected>Category: {{product.category}}</option>
+                                                    <option>Men</option>
+                                                    <option>Women</option>
+                                                    <option>Kid</option>                                                        
+                                                </select>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <label for="">Image</label>
+                                        <input type="file" class="form-control" name="image" id="img">
+                                        <img src="https://res.cloudinary.com/dgci6plhk/image/upload/images/{{product._id}}/{{product.nameImage}}.jpg" id="imgPreview" alt="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="text-center custom-pro-edt-ds">
+                                            <button type="submit" class="btn btn-ctl-bt waves-effect waves-light m-r-10">Update
+                                                </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-       </div>
+        </div>
+    </div>
+</div>
 
 
 

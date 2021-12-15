@@ -5,5 +5,4 @@ const customerController = require('./customerController');
 router.get('/', customerController.list);
 router.get('/:page', customerController.list)
 
-
 module.exports = router;
