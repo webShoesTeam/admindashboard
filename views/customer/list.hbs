@@ -1,0 +1,41 @@
+        <div class="product-status mg-b-30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="product-status-wrap">
+                            <h4>Customer List</h4>
+                            {{!-- <div class="add-product">
+                                <a href="/register">Add admin account</a>
+                            </div> --}}
+                            <table>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    {{!-- <th>Setting</th> --}}
+                                </tr>
+                                {{#each customers}}
+                                <tr>
+                                    <td> {{this.name}} </td>
+                                    <td>{{this.username}}</td>
+                                    <td>{{this.email}}</td>
+                                    <td>{{this.phone}}</td>
+                                    <td>{{this.address}}</td>
+                                </tr>
+                                {{/each}}
+                            </table>
+
+                            <div class="custom-pagination">
+                                <input type= "hidden" name="current" id="current" value="{{current}}">
+                                <input type= "hidden" name="pages" id="pages" value="{{pages}}">
+								<ul class="pagination" id="listpage">
+								</ul>
+                                <script src="/js/paginate.js"></script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

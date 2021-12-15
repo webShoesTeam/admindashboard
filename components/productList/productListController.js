@@ -12,6 +12,23 @@ cloudinary.config({
     api_secret: process.env.API_SECRET
   });
 
+
+exports.productAdd = async function(req,res){
+    res.render('productList/productadd',{ title: 'productadd' });
+}
+
+exports.productDetail = async function(req,res){
+    res.render('productList/productdetail', { title: 'productdetail' });
+}
+
+exports.productCart = async function(req,res){
+    res.render('productList/productcart', { title: 'productcart' });
+}
+
+exports.productPayment = async function(req,res){
+    res.render('productList/productpayment', { title: 'productpayment' });
+}
+
 exports.list = async function(req, res) {
     const perPage = 6;
     const page = req.params.page || 1;
@@ -53,10 +70,9 @@ exports.add = async function(req, res) {
 
 exports.edit = function(req, res) {
     const id = req.params.id;
-
     Product.findById(id)
         .then(result => {
-            res.render('productedit', {product: result});
+            res.render('productList/productedit', {product: result});
         })
         .catch(err => console.log(err));
 };
@@ -82,13 +98,9 @@ exports.update = async function(req, res) {
 
         Product.findByIdAndUpdate(id, fields)
         .then((result) => {
-            
             cloudinary.uploader.upload(files.image.filepath, { public_id: `images/${result._id}/${result.nameImage}`,width: 479, height: 340, crop: "scale"})
             res.redirect('/productlist');
         })
         .catch(err => console.log(err));
-
-        
-
     })
 };

@@ -16,20 +16,20 @@ router.get('/', loggedInUserGuard.hasLogin, function(req, res, next) {
 //   res.render('productedit', { title: 'productedit' });
 // });
 
-router.get('/productadd', function(req, res, next) {
-  res.render('productadd', { title: 'productadd' });
-});
+// router.get('/productadd', function(req, res, next) {
+//   res.render('productadd', { title: 'productadd' });
+// });
 
-router.get('/productdetail', function(req, res, next) {
-  res.render('productdetail', { title: 'productdetail' });
-});
+// router.get('/productdetail', function(req, res, next) {
+//   res.render('productdetail', { title: 'productdetail' });
+// });
 
-router.get('/productcart', function(req, res, next) {
-  res.render('productcart', { title: 'productcart' });
-});
+// router.get('/productcart', function(req, res, next) {
+//   res.render('productcart', { title: 'productcart' });
+// });
 
-router.get('/productpayment', function(req, res, next) {
-  res.render('productpayment', { title: 'productpayment' });
-});
+// router.get('/productpayment', function(req, res, next) {
+//   res.render('productpayment', { title: 'productpayment' });
+// });
 
 module.exports = router;

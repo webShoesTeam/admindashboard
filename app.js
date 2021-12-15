@@ -11,6 +11,7 @@ const users = require('./routes/users');
 
 const productListRouter = require('./components/productList/index');
 const adminListRouter = require('./components/adminList/index');
+const customerRouter = require('./components/customer/index');
 const authRouter = require('./components/auth/index');
 const loggedInUserGuard = require('./middlewares/loggedInUserGuard');
 
@@ -46,6 +47,7 @@ app.use('/users', users);
 
 app.use('/productlist', loggedInUserGuard.hasLogin, productListRouter);
 app.use('/accountlist', loggedInUserGuard.hasLogin, adminListRouter);
+app.use('/customer', loggedInUserGuard.hasLogin, customerRouter);
 
 
 // catch 404 and forward to error handler
