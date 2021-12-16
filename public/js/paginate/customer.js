@@ -51,7 +51,7 @@ if (current == pages) {
     link.textContent = "Next";
 }
 else{
-    var s = current + 1
+    var s = Number(current) + 1
     link.href  = "/customer/" + s;
     link.textContent = "Next";
 }
