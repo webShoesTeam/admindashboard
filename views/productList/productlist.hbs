@@ -1,22 +1,41 @@
-<div class="breadcome-area">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="breadcome-list">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <div class="breadcomb-wp">
-                                <div class="breadcomb-ctn">
-                                <h2>Product List</h2>
-                                </div>
-                            </div>
-                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="dropdown" style="float:right;">
+  <button class="dropbtn">Size</button>
+  <div class="dropdown-content">
+  <a href="#">Small</a>
+  <a href="#">Medium</a>
+  <a href="#">Large</a>
+  <a href="#">Extra Large</a>
+  </div>
 </div>
+
+<div class="dropdown" style="float:right;">
+  <button class="dropbtn">Color</button>
+  <div class="dropdown-content">
+  <a href="#">Green</a>
+  <a href="#">Red</a>
+  <a href="#">Blue</a>
+  <a href="#">Purple</a>
+  </div>
+</div>
+
+<div class="dropdown" style="float:right;">
+  <button class="dropbtn">Sort</button>
+  <div class="dropdown-content">
+  <a href="#">Price ascending</a>
+  <a href="#">Price descending</a>
+  </div>
+</div>
+
+<div class="dropdown" style="float:right;">
+  <button class="dropbtn">Category</button>
+  <div class="dropdown-content">
+  <a href="#">Men</a>
+  <a href="#">Women</a>
+  <a href="#">Children</a>
+  </div>
+</div>
+
+
 
 <div class="product-status mg-b-30">
     <div class="container-fluid">
@@ -25,7 +44,7 @@
                 <div class="product-status-wrap">
                     <h4>Products List</h4>
                     <div class="add-product">
-                        <a href="/productlist/productadd">Add Product</a>
+                        <a href="/productadd">Add Product</a>
                     </div>
                     <table>
                         <tr>
@@ -48,8 +67,8 @@
                             <td>{{this.size}}</td>
                             <td>{{this.color}}</td>
                             <td>
-                                {{!-- <button data-toggle="tooltip" title="Edit" class="edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-<                                       <button data-toggle="tooltip" title="Delete" class="delete" data-doc="{{this._id}}"><i class="fa fatrash--o" aria-hidden="true"></i></button> --}}
+                                        {{!-- <button data-toggle="tooltip" title="Edit" class="edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                        <button data-toggle="tooltip" title="Delete" class="delete" data-doc="{{this._id}}"><i class="fa fatrash--o" aria-hidden="true"></i></button> --}}
                                 <a data-toggle="tooltip" title="Edit" class="edit" href="/productlist/edit/{{this._id}}">Edit</a>
                                 <a data-toggle="tooltip" title="Delete" class="delete" href="/productlist/delete/{{this._id}}">Delete</a>
                             </td>
