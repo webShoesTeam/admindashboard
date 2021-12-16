@@ -9,7 +9,8 @@ router.get('/detail/:id', billController.getBillWithIdBill);
 router.get('/history', billController.getBillWithUserId);
 
 router.get('/remove/:id', billController.removeBill);
-
+router.get('/delivery/:id', billController.deliveryBill);
+router.get('/complete/:id', billController.completeBill);
 
 module.exports = router;
 

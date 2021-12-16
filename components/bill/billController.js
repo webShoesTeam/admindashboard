@@ -32,10 +32,21 @@ exports.getBillWithUserId = async (req, res) => {
 }
 
 exports.removeBill = async (req, res) => {
+    const billId = req.params.id;   
+    await billService.removeBillWithId(billId);
+    res.redirect('/bill')
+}
+
+exports.deliveryBill = async (req, res) => {
+    const billId = req.params.id;    
+    await billService.updateStatusBillWithId(billId, "delivering");
+    res.redirect('/bill')
+}
+
+exports.completeBill = async (req, res) => {
 
     const billId = req.params.id;
-    console.log("bill id" + billId);
-    await billService.removeBillWithId(billId);
+    await billService.updateStatusBillWithId(billId, "completed");
 
     res.redirect('/bill')
 }

@@ -22,7 +22,17 @@ exports.getBillWithUserId = async (userId) => {
     return bills;
 }
 
+exports.updateStatusBillWithId = async (billId) => {
+    await Bill.findByIdAndDelete({_id: billId});
+    return
+}
+
 exports.removeBillWithId = async (billId) => {
     await Bill.findByIdAndDelete({_id: billId});
+    return
+}
+
+exports.updateStatusBillWithId = async (billId, status) => {
+    await Bill.findByIdAndUpdate({_id: billId}, {status: status});
     return
 }

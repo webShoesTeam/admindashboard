@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
 
-
 const index = require('./routes/index');
 const users = require('./routes/users');
 
@@ -22,8 +21,11 @@ const passport = require('passport');
 const app = express();
 
 // view engine setup
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -39,6 +41,8 @@ app.use(function(req, res, next){
   res.locals.user = req.user;
   next();
 })
+
+
 
 app.use('/', authRouter);
 app.use('/', loggedInUserGuard.hasLogin, index);

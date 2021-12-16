@@ -1,10 +1,10 @@
 
-
+  
     {{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
-    
+   
     <style>
         .table tr {
             cursor: pointer;
@@ -76,8 +76,16 @@
                                 <td>{{this.userName}}</td>
                                 <td class="bill-date">{{this.createdAt}}</td>
                                 <td>{{this.total}}</td>
-                                <td>{{this.status}}</td>
-                                <td><a class="btn btn-success btn" href="/bill/remove/{{this._id}}" role="button">Done</a></td>
+                                <td class="status">{{this.status}}</td>
+                                <td>
+                                    <a class="btn btn-warning btn delivery" href="/bill/delivery/{{this._id}}" role="button" id="delivery" style="display: none;">To Delivery</a>
+                                    <a class="btn btn-success btn complete" href="/bill/complete/{{this._id}}" role="button" id="done" style="display: none;">Confirm Complete</a>    
+                                </td>
+                                <td>
+                                    <a class="btn btn-danger btn remove" href="/bill/remove/{{this._id}}" role="button" id="done" style="display: block;">Cancel order</a>
+                                    <a class="btn btn-primary btn done" href="#" role="button" id="done" style="display: none;">Success</a>
+                                </td>
+                              
                             </tr>
                             <tr class="p">
                                 <td colspan="12" class="hiddenRow">
@@ -153,7 +161,7 @@
             
             for(i=0;i<dates.length;i++){
                 var dt = dates[i].innerHTML;
-                console.log("dt: " + dt);
+                
                 const tempDate = new Date(dt);
                 const dd = tempDate.getDate();
                 const mm = tempDate.getMonth() + 1;
@@ -164,7 +172,7 @@
 
                 const timeDisplay = dd + '/' + mm + '/' + yy + " " + hh + ':' + mt + ':' + sc;    
                 dates[i].innerHTML = timeDisplay;
-                console.log(timeDisplay);
+                
             }        
         }
         formatDate();
@@ -176,6 +184,37 @@
             $(this).next('tr').find('.hiddenRow').show();
         });
     </script>
+    <script>
+        var sitePlusMinus = function() {
+         
+            
+            var items = document.getElementsByClassName("status");
+            for (let i=0;i<items.length;i++) {
+                console.log(items[i].innerHTML)
+                if (items[i].innerHTML == "processing") {
+                    var row = items[i].closest(".accordion-toggle");
+                    var button = row.querySelector('.delivery');                
+                    button.style.display = "block"
+                } else if (items[i].innerHTML == "delivering") {
+                    var row = items[i].closest(".accordion-toggle");
+                    var button = row.querySelector('.complete');                
+                    button.style.display = "block"
+                } else if (items[i].innerHTML == "completed") {
+                    var row = items[i].closest(".accordion-toggle");
+                    var button = row.querySelector('.remove');                
+                    button.style.display = "none";
+                    var button2 = row.querySelector('.done');                
+                    button2.style.display = "block";
+                    
+                } 
+                
+            }
+
+
+	    };
+	sitePlusMinus();
+    </script>
+   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
