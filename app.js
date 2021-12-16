@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
 
-
 const index = require('./routes/index');
 const users = require('./routes/users');
 
@@ -14,7 +13,7 @@ const adminRouter = require('./components/admin/index');
 const customerRouter = require('./components/customer/index');
 const authRouter = require('./components/auth/index');
 const loggedInUserGuard = require('./middlewares/loggedInUserGuard');
-
+const billRouter = require('./components/bill/billRouter');
 //const { session } = require('passport');
 const passport = require('passport');
 
@@ -22,8 +21,11 @@ const passport = require('passport');
 const app = express();
 
 // view engine setup
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -40,6 +42,8 @@ app.use(function(req, res, next){
   next();
 })
 
+
+
 app.use('/', authRouter);
 app.use('/', loggedInUserGuard.hasLogin, index);
 app.use('/users', users);
@@ -48,7 +52,7 @@ app.use('/users', users);
 app.use('/productlist', loggedInUserGuard.hasLogin, productListRouter);
 app.use('/admin', loggedInUserGuard.hasLogin, adminRouter);
 app.use('/customer', loggedInUserGuard.hasLogin, customerRouter);
-
+app.use('/bill', loggedInUserGuard.hasLogin, billRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
