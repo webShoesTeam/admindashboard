@@ -9,3 +9,14 @@ exports.list = (page,perPage) => {
 }
 
 exports.count = () => { return Product.countDocuments()}
+
+exports.findProductById = async (id) => {
+    const pro = await Product.findById({_id: id});
+    return pro;
+}
+
+exports.updateImageGallery = async (newLinks, product) => {
+    product.galleryImageLinks = newLinks;
+    await product.save();
+   
+}

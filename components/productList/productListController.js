@@ -104,3 +104,40 @@ exports.update = async function(req, res) {
         .catch(err => console.log(err));
     })
 };
+
+
+exports.getGallery = async function(req, res) {
+    const id = req.params.id;
+    const product = await productListService.findProductById(id);
+    console.log("product: " + JSON.stringify(product))
+    res.render('productlist/productgallery', {
+        title: "Gallery",
+        product: product,
+    })
+};
+
+
+/*
+ * POST product gallery
+ */
+exports.postGallery = async function (req, res) {
+
+    const id = req.params.id;
+    var product = await productListService.findProductById(id);
+    const redi = "/productlist/productgallery/" + id;
+    let newLinks = product.galleryImageLinks || [];
+    form.parse(req, async (err,fields,files)=>{
+        
+        await cloudinary.uploader.upload(files.file.filepath, { public_id: `images/${id}/gallery/${files.file.newFilename}`,width: 479, height: 340, crop: "scale", fetch_format: "jpg"}, async function(error, result) {
+           newLinks.push(result.url);
+           console.log("\n\nnew url: " + result.url);
+           console.log("inside cloud")
+           await productListService.updateImageGallery(newLinks, product);
+           res.status(201).end()
+        })
+
+        
+        // console.log("after redirect: " + redi + "\n\n")
+    })
+ 
+};
