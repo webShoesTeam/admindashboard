@@ -16,6 +16,7 @@ const loggedInUserGuard = require('./middlewares/loggedInUserGuard');
 const billRouter = require('./components/bill/billRouter');
 //const { session } = require('passport');
 const passport = require('passport');
+const { reset } = require('nodemon');
 
 
 const app = express();
@@ -27,7 +28,7 @@ app.set('view engine', 'hbs');
 
 
 
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -42,7 +43,9 @@ app.use(function(req, res, next){
   next();
 })
 
-
+// app.get('/test', (req,res) => {
+//   res.render('productList/productgallery')
+// })
 
 app.use('/', authRouter);
 app.use('/', loggedInUserGuard.hasLogin, index);

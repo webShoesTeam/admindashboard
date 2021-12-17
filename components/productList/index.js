@@ -15,5 +15,6 @@ router.get('/productadd',productListController.productAdd);
 router.get('/productdetail',productListController.productDetail);
 router.get('/productcart',productListController.productCart);
 router.get('/productpayment',productListController.productPayment);
-
+router.get('/productgallery/:id', productListController.getGallery);
+router.post('/productgallery/:id', productListController.postGallery);
 module.exports = router;
