@@ -1,0 +1,237 @@
+<div class="s008">
+    <form action="/product/filter?page=1" method="POST">
+    <div class="inner-form">
+        <div class="advance-search">
+            <span class="desc">Filter</span>
+                <div class="row">
+                    <div class="input-field">
+                        <div class="input-select">
+                            <select data-trigger="" id="select-size" name="size">
+                                <option value="" disabled selected>Size</option>
+                                <option>Small</option>
+                                <option>Medium</option>
+                                <option>Large</option>
+                                <option>Purple</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-field">
+                        <div class="input-select">
+                            <select data-trigger="" id="select-color" name="color">
+                                <option value="" disabled selected>Color</option>
+                                <option>Green</option>
+                                <option>Red</option>
+                                <option>Blue</option>
+                                <option>Purple</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-field">
+                        <div class="input-select">
+                            <select data-trigger="" id="select-category" name="category">
+                                <option value="" disabled selected>Category</option>
+                                <option>Men</option>
+                                <option>Women</option>
+                                <option>Children</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-field">
+                        <div class="input-select">
+                            <select data-trigger="" id="select-sort" name="sort">
+                                <option value="" disabled selected>Sort</option>
+                                <option value="1">Price ascending</option>
+                                <option value="-1" >Price descending</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+            <div class="row third">
+                <div class="input-field">
+                    <div class="result-count">
+                        <span> </span>
+                    </div>
+                    <div class="group-btn">
+                        <a class="btn-delete" id="delete" href="/product">Reset</a>
+                        <button class="btn-search" id="SearchButton">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+
+
+<div class="product-status mg-b-30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-status-wrap">
+                    <h4>Products List</h4>
+                    <div class="add-product">
+                        <a href="/product/pageadd">Add Product</a>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Detail</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Size</th>
+                            <th>Color</th>
+                            <th>Setting</th>
+                        </tr>
+                        {{#each products}}
+                        <tr>
+                            <td><img src="https://res.cloudinary.com/dgci6plhk/image/upload/images/{{this._id}}/{{this.nameImage}}.jpg" alt="" /></td>
+                            <td> {{this.name}} </td>
+                            <td>{{this.detail}}</td>
+                            <td>{{this.category}}</td>
+                            <td>{{this.price}}</td>
+                            <td>{{this.size}}</td>
+                            <td>{{this.color}}</td>
+                            <td>
+                                        {{!-- <button data-toggle="tooltip" title="Edit" class="edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                        <button data-toggle="tooltip" title="Delete" class="delete" data-doc="{{this._id}}"><i class="fa fatrash--o" aria-hidden="true"></i></button> --}}
+                                <a data-toggle="tooltip" title="Edit" class="edit" href="/productlist/edit/{{this._id}}">Edit</a>
+                                <a data-toggle="tooltip" title="Edit" class="edit" href="/productlist/productgallery/{{this._id}}">Add Gallery</a>
+                                <a data-toggle="tooltip" title="Delete" class="delete" href="/productlist/delete/{{this._id}}">Delete</a>
+                            </td>
+
+                        </tr>
+                        {{/each}}
+                    </table>
+
+                    <div class="custom-pagination">
+                        <ul class="pagination" id="listpage">
+                        </ul>
+                    </div>
+                    <script>
+
+                        var strBegin = ""
+                        if( window.location.href.search("page") != -1){
+                            strBegin = window.location.href.substring(window.location.href.search("/product"), window.location.href.search("page")).replace("?","")
+                        }
+                        else{
+                            strBegin =window.location.href.substring(window.location.href.search("/product"))
+                        }
+                        var strEnd = ""
+                        if("{{sizes}}" != 0){
+                            strEnd += `&size={{sizes}}`
+                        }
+                        if("{{colors}}" != 0){
+                            strEnd += `&color={{colors}}`
+                        }
+                        if("{{category}}" != 0){
+                            strEnd += `&category={{category}}`
+                        }
+                        if("{{sort}}" != 0){
+                            strEnd += `&sort={{sort}}`
+                        }
+                        if(strEnd == "&sort=-1") {
+                            strEnd = ""
+                        }
+                        strBegin += "?page="
+                        var uList = document.getElementById("listpage");
+                        var numPage = 3;
+                        var i = 1;  
+                        var tagLi = document.createElement("li");
+                        var link = document.createElement("a");
+                        link.className = "listpaginate";
+                        if({{current}} == null){
+                            {{current}} == 1
+                        }
+                        //
+                        if({{current}} >= 3){
+                            i = {{current}} - 2;
+                        }
+
+                        // <
+                        if({{current}} == 1){
+                            link.href  = "#";
+                            link.textContent = "<";
+                        }
+                        else{
+                            var s = {{current}} - 1
+                            link.href  = strBegin+ s + strEnd;
+                            link.textContent = "<";
+                        }
+                        tagLi.appendChild(link);
+                        uList.appendChild(tagLi);
+
+                        //center
+                        
+                        for(;i <= {{current}} + 2 && i <= {{pages}};i++){
+                        tagLi = document.createElement("li");
+                        link = document.createElement("a");
+                        link.className = "listpaginate";
+                        if(i == {{current}}){
+                            tagLi.classList.add('active')
+                            link = document.createElement("span");
+                            link.textContent = i;
+                        }
+                        else{
+                            link.href = strBegin + i + strEnd;
+                            link.textContent = i;
+                        }
+                        tagLi.appendChild(link);
+                        uList.appendChild(tagLi); 
+                        }
+
+
+                        // >
+                        tagLi = document.createElement("li");
+                        link = document.createElement("a");
+                        link.className = "listpaginate";
+                        if ({{current}} == {{pages}}) {
+                            link.href  = "#";
+                            link.textContent = ">";
+                        }
+                        else{
+                            var s = {{current}} + 1
+                            link.href = strBegin + s + strEnd;
+                            link.textContent = ">";
+                        }
+                        tagLi.appendChild(link);
+                        uList.appendChild(tagLi); 
+
+                        var options = document.getElementById("select-size").options;
+                        for (var i = 0; i < options.length; i++) {
+                            if (options[i].text == "{{sizes}}") {
+                                options[i].selected = true;
+                                break;
+                            }
+                        }
+                        var options = document.getElementById("select-color").options;
+                        for (var i = 0; i < options.length; i++) {
+                            if (options[i].text == "{{colors}}") {
+                                options[i].selected = true;
+                                break;
+                            }
+                        }
+                        var options = document.getElementById("select-category").options;
+                        for (var i = 0; i < options.length; i++) {
+                            if (options[i].text == "{{category}}") {
+                                options[i].selected = true;
+                                break;
+                            }
+                        }
+                        var options = document.getElementById("select-sort").options;
+                        for (var i = 0; i < options.length; i++) {
+                            if (options[i].value == "{{sort}}") {
+                                options[i].selected = true;
+                                break;
+                            }
+                        }
+
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

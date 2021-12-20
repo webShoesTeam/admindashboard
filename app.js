@@ -8,7 +8,7 @@ const session = require('express-session');
 const index = require('./routes/index');
 const users = require('./routes/users');
 
-const productListRouter = require('./components/productList/index');
+const productRouter = require('./components/product/index');
 const adminRouter = require('./components/admin/index');
 const customerRouter = require('./components/customer/index');
 const authRouter = require('./components/auth/index');
@@ -43,16 +43,13 @@ app.use(function(req, res, next){
   next();
 })
 
-// app.get('/test', (req,res) => {
-//   res.render('productList/productgallery')
-// })
 
 app.use('/', authRouter);
 app.use('/', loggedInUserGuard.hasLogin, index);
 app.use('/users', users);
 
 
-app.use('/productlist', loggedInUserGuard.hasLogin, productListRouter);
+app.use('/product', loggedInUserGuard.hasLogin, productRouter);
 app.use('/admin', loggedInUserGuard.hasLogin, adminRouter);
 app.use('/customer', loggedInUserGuard.hasLogin, customerRouter);
 app.use('/bill', loggedInUserGuard.hasLogin, billRouter);
