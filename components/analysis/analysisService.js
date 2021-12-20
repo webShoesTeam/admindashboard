@@ -14,18 +14,24 @@ exports.findBillsOneMonth = async (maxDay, month, year) => {
     // }});
 
     const orders = await Bill.aggregate([
-        {$addFields: {  "day" : {$dayOfMonth: '$createdAt'}}},
-        {$match: { dayOfMonth: 15}}
+        {$addFields: {  
+            "day" : {$dayOfMonth: '$createdAt'},
+            "year": { $year: "$createdAt" },
+            "month": { $month: "$createdAt" },
+            }
+        },
+        {$match: { month: month, year: year}}
     ]);
 
+    // righted:
+    // const orders2  = await Bill.aggregate([
+    //     {$addFields: {  "day" : {$dayOfMonth: '$createdAt'}}},
+    //     {$match: { day: 15}}
+    // ]);
 
-    const orders2  = await Bill.aggregate([
-        {$addFields: {  "day" : {$dayOfMonth: '$createdAt'}}},
-        {$match: { day: 15}}
-    ]);
-    for (let i=0; i<orders2.length; i++) {
+    for (let i=0; i<orders.length; i++) {
         console.log("order2" + i + "\n\n")
-        console.log(JSON.stringify(orders2[i]));
+        console.log(JSON.stringify(orders[i]));
         
     }
     

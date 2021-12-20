@@ -6,5 +6,6 @@ const analysisController = require('./analysisController');
 
 router.get('/', analysisController.getTotalOrderInOneMonth);
 
+router.get('/test', analysisController.test);
 module.exports = router;
 
