@@ -1,5 +1,5 @@
 const billService = require('../bill/billService');
-// const productListService = require('../productList/productListService');
+const productListService = require('../product/productService');
 
 const Bill = require('../../models/billModel');
 
