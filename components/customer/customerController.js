@@ -11,3 +11,10 @@ exports.list = async function(req, res) {
         pages: Math.ceil(count / perPage)
       });
 };
+
+// exports.edit = async function(req, res) {
+//   const id = req.params.id;
+
+//   await customerService.findByIdAndUpdate(id);
+// };
+

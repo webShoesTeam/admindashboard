@@ -32,6 +32,10 @@ const userSchema = mongoose.Schema({
     type: String,
     default: ''
   },
+  isBanned: {
+    type: Boolean,
+    default: false
+  },
   cart: [
     {
       product: {
