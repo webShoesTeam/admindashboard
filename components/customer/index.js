@@ -4,6 +4,6 @@ const customerController = require('./customerController');
 
 router.get('/', customerController.list);
 router.get('/:page', customerController.list)
-// router.get('/edit/:id', customerController.edit)
+router.get('/isbanned/:id', customerController.isBanned)
 
 module.exports = router;

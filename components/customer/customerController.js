@@ -12,9 +12,10 @@ exports.list = async function(req, res) {
       });
 };
 
-// exports.edit = async function(req, res) {
-//   const id = req.params.id;
+exports.isBanned = async function(req, res) {
+  const id = req.params.id;
 
-//   await customerService.findByIdAndUpdate(id);
-// };
+  await customerService.findByIdAndUpdate(id);
+  res.redirect('/customer');
+};
 

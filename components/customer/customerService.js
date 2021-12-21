@@ -9,3 +9,15 @@ exports.list = (page,perPage) => {
 }
 
 exports.count = () => { return Customer.countDocuments()}
+
+exports.findByIdAndUpdate = async (id) => { 
+    const user = await Customer.findOne({
+        _id: id
+    });
+
+    if (user) {
+        user.isBanned = !user.isBanned;
+        await user.save();
+    }
+}
+
