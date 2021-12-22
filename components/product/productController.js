@@ -246,6 +246,7 @@ exports.getGallery = async function(req, res) {
     res.render('product/gallery', {
         title: "Gallery",
         product: product,
+        id: JSON.stringify(product._id),
     })
 };
 
@@ -273,6 +274,20 @@ exports.postGallery = async function (req, res) {
         // console.log("after redirect: " + redi + "\n\n")
     })
  
+};
+
+exports.postRemoveGallery = async function (req, res) {
+
+    const id = req.params.id;
+    const removeLink = req.query.link;
+    var product = await productListService.findProductById(id);
+    const redi = "/product/gallery/" + id;
+    console.log("id: " + id)
+    let newLinks = product.galleryImageLinks;
+    newLinks = newLinks.filter(item => item !== removeLink)
+    await productListService.updateImageGallery(newLinks, product);
+    
+    res.redirect(redi);
 };
 
 exports.productAdd = async function(req,res){

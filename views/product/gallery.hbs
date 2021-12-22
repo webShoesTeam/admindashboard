@@ -37,7 +37,7 @@
                                     {{#each product.galleryImageLinks}}
                                         <div class="col-2 col-lg-2 col-md-2 col-sm-2">
                                             <img class="img-fluid img-thumbnail" src="{{this}}" alt="img" >&nbsp;
-                                            <a class="confirmDeletion" href="/admin/products/delete-image/<%= image %>?id=<%= id %>">delete</a>
+                                            <a class="confirmDeletion" href="/product/gallery/remove/{{../product._id}}?link={{this}}">delete</a>
                                         </div>
                                     
                                     {{/each}}
