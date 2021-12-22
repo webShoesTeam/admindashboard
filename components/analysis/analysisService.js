@@ -40,5 +40,35 @@ exports.findBillsOneMonth = async (maxDay, month, year) => {
 
 }
 
+exports.findBillsOneYear = async (year) => {
+
+    const orders = await Bill.aggregate([
+        {$addFields: {  
+            "day" : {$dayOfMonth: '$createdAt'},
+            "year": { $year: "$createdAt" },
+            "month": { $month: "$createdAt" },
+            }
+        },
+        {$match: { year: year}}
+    ]);
+    
+    return orders;
+}
+
+exports.findBillsAllYear = async () => {
+
+    const orders = await Bill.aggregate([
+        {$addFields: {  
+            "day" : {$dayOfMonth: '$createdAt'},
+            "year": { $year: "$createdAt" },
+            "month": { $month: "$createdAt" },
+            }
+        },
+        
+    ]);
+    
+    return orders;
+}
+
 
 
