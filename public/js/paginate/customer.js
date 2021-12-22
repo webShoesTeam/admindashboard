@@ -11,7 +11,7 @@ if(current == null){
 }
 //
 if(current  >= 3){
-    i = current - 2;
+    i = Number(current) - 2;
 }
 
 // <
@@ -20,7 +20,7 @@ if(current == 1){
     link.textContent = "Previous";
 }
 else{
-    var s = current  - 1
+    var s = Number(current)  - 1
     link.href  = "/customer/" + s;
     link.textContent = "Previous";
 }
