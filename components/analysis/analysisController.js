@@ -35,10 +35,6 @@ exports.getTotalOrderInOneMonth = async (req, res) => {
             }
 
         });
-        // console.log(i + ". " + date);
-        // console.log("total: " + total);
-        // console.log("day: " + day)
-        // console.log("\n\n");
     }
 
     // console.log(x);
@@ -46,6 +42,7 @@ exports.getTotalOrderInOneMonth = async (req, res) => {
     res.render('analysis/test', {
         titleChart: JSON.stringify("Total sale in days for one month"),
         dataArray: JSON.stringify(x),
+        unit: JSON.stringify("Day"),
     })
     
 }
@@ -63,8 +60,6 @@ exports.getTotalOrderIn12Month = async (req, res) => {
   
     for (let i=0; i<orders.length; i++) {
         const total = orders[i].total;
-        const date = orders[i].createdAt;
-        // const day = orders[i].day;
         const month = orders[i].month;
         x[month-1][4] += total;
        
@@ -78,17 +73,12 @@ exports.getTotalOrderIn12Month = async (req, res) => {
             }
 
         });
-        // console.log(i + ". " + date);
-        // console.log("total: " + total);
-        // console.log("day: " + day)
-        // console.log("\n\n");
     }
-
-    // console.log(x);
 
     res.render('analysis/test', {
         titleChart: JSON.stringify("Total sale in months for one year"),
         dataArray: JSON.stringify(x),
+        unit: JSON.stringify("Month")
     })
     
 }
@@ -164,7 +154,7 @@ exports.getTotalOrderInSeason = async (req, res) => {
         else if (orders.month <10) index=2;
         else index=3;
         x[index][4] += total;
-        console.log("index: " + index);
+        
         orders[i].products.forEach(element => {
             if (element.item.category == "Men") {
                 x[index][1] += element.totalMoney;
@@ -178,7 +168,7 @@ exports.getTotalOrderInSeason = async (req, res) => {
 
     }
 
-    console.log(JSON.stringify(x));
+    
 
     res.render('analysis/curveChart', {
         titleChart: JSON.stringify("Total sale in 4 seasons"),

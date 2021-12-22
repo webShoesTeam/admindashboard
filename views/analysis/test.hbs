@@ -108,10 +108,12 @@
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="actions graph-rp">
                                             <div class="btn-group" data-toggle="buttons">
-                                                <label class="btn btn-grey active">
-													<input type="radio" name="options" class="toggle" id="option1" checked="">Today</label>
-                                                <label class="btn btn-grey">
-													<input type="radio" name="options" class="toggle" id="option2">Week</label>
+                                                {{!-- <label class="btn btn-grey active"><input type="radio" name="options" class="toggle" id="option1" checked="">Today</label> --}}
+                                                {{!-- <label class="btn btn-grey"><input name="options" onclick="window.location.href='/analysis/month'" class="toggle" id="option2">Month</label> --}}
+                                                <button class="toggle" onclick="window.location.href='/analysis'">Day</button>
+												<button class="toggle" onclick="window.location.href='/analysis/month'">Month</button>
+                                                <button class="toggle" onclick="window.location.href='/analysis/season'">Season</button>
+                                                <button class="toggle" onclick="window.location.href='/analysis/year'">Year</button>
                                             </div>
                                         </div>
                                     </div>
@@ -191,7 +193,7 @@
     function drawChart() {
 
         var data = new google.visualization.DataTable();
-        data.addColumn('number', 'Day');
+        data.addColumn('number', {{{unit}}});
         data.addColumn('number', 'Men');
         data.addColumn('number', 'Women');
         data.addColumn('number', 'Children');
