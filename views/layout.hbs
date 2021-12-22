@@ -62,6 +62,7 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="/js/vendor/modernizr-2.8.3.min.js"></script>
+
 </head>
 <body>
     <div class="left-sidebar-pro">
@@ -95,10 +96,12 @@
                                 <li><a title="Dashboard" href="/"><span class="mini-sub-pro">Dashboard</span></a></li>
                                 {{!-- <li><a title="Dashboard v.2" href="index-1.html"><span class="mini-sub-pro">Dashboard v.2</span></a></li>
                                 <li><a title="Dashboard v.3" href="index-2.html"><span class="mini-sub-pro">Dashboard v.3</span></a></li> --}}
-                                <li><a title="Product List" href="/productlist"><span class="mini-sub-pro">Product List</span></a></li>
-                                <li><a title="Product Add" href="/productadd"><span class="mini-sub-pro">Product Add</span></a></li>
-                                <li><a title="Product Add" href="/accountlist"><span class="mini-sub-pro">Admin List</span></a></li>
-
+                                <li><a title="Product List" href="/product"><span class="mini-sub-pro">Product List</span></a></li>
+                                <li><a title="Product Add" href="/product/pageadd"><span class="mini-sub-pro">Product Add</span></a></li>
+                                <li><a title="Admin List" href="/admin"><span class="mini-sub-pro">Admin List</span></a></li>
+                                <li><a title="Customer List" href="/customer"><span class="mini-sub-pro">Customer List</span></a></li>
+                                <li><a title="Orders" href="/bill"><span class="mini-sub-pro">Order List</span></a></li>
+                                <li><a title="Orders" href="/analysis"><span class="mini-sub-pro">Analysis</span></a></li>
 <!--                                <li><a title="Product Edit" href="/productedit"><span class="mini-sub-pro">Product Edit</span></a></li>-->
                                 {{!-- <li><a title="Product Detail" href="/productdetail"><span class="mini-sub-pro">Product Detail</span></a></li>
                                 <li><a title="Product Cart" href="/productcart"><span class="mini-sub-pro">Product Cart</span></a></li>
@@ -894,34 +897,6 @@
               </div>
           </div>
           <!-- Mobile Menu end -->
-          <div class="breadcome-area">
-              <div class="container-fluid">
-                  <div class="row">
-                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                          <div class="breadcome-list">
-                              <div class="row">
-                                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                      <div class="breadcomb-wp">
-                    <div class="breadcomb-icon">
-                      <i class="icon nalika-home"></i>
-                    </div>
-                    <div class="breadcomb-ctn">
-                      <h2>Dashboard Three</h2>
-                      <p>Welcome to Nalika <span class="bread-ntd">Admin Template</span></p>
-                    </div>
-                  </div>
-                                  </div>
-                                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                      <div class="breadcomb-report">
-                    <button data-toggle="tooltip" data-placement="left" title="Download Report" class="btn"><i class="icon nalika-download"></i></button>
-                  </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
       </div>
      
         {{{body}}}

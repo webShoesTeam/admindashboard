@@ -65,14 +65,21 @@ exports.saveUpdate = async (req, res) => {
     const password2 = await req.body.password2;
     const address = await req.body.address;
 
-    
+    if (password !== password2) {
+        console.log("Password do not match");
+        res.render('profile', {
+            title: "profile",
+        });
+        return;
+    }
+
     check('name', 'Name is required!').notEmpty();
     check('email', 'Email is required!').isEmail();
     check('phone', 'Email is required!').notEmpty();
     check('address', 'Email is required!').notEmpty();
     check('username', 'Username is required!').notEmpty();
     check('password', 'Password is required!').notEmpty();
-    check('password2', 'Passwords do not match!').equals(password);
+    // check('password2', 'Passwords do not match!').equals(password);
 
     const errors = validationResult(req);
 
@@ -81,13 +88,30 @@ exports.saveUpdate = async (req, res) => {
         res.redirect("/users/profile");
     }
     else {
-       try {
-            await userService.updateUser(id, name, email, phone, address, username, password);
-            //console.log("body: \n" + JSON.stringify(req.body));
-            // res.locals.messages = "Update successfull"
-            res.redirect('/users/profile');
-       } catch (Exception) {
-            res.redirect('/users/profile');
-       }
+        const usernameFound = await userService.findByUsername(username);
+        const emailFound = await userService.findByEmail(email);
+
+        if (usernameFound && (id != usernameFound._id)) {
+            res.render('profile', {
+                title: "profile",
+                errors: "Username or email existed",
+            });
+        }
+        else if (emailFound && (id != emailFound._id)) {
+            res.render('profile', {
+                title: "profile",
+                errors: "Username or email existed",
+            });
+        }
+        else {
+            try {
+                await userService.updateUser(id, name, email, phone, address, username, password);
+                //console.log("body: \n" + JSON.stringify(req.body));
+                // res.locals.messages = "Update successfull"
+                res.redirect('/users/profile');
+            } catch (Exception) {
+                res.redirect('/users/profile');
+            }
+        }
     }
 }

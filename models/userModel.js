@@ -32,6 +32,10 @@ const userSchema = mongoose.Schema({
     type: String,
     default: ''
   },
+  isBanned: {
+    type: Boolean,
+    default: false
+  },
   cart: [
     {
       product: {
@@ -45,6 +49,6 @@ const userSchema = mongoose.Schema({
   ]
 });
 
-const User = mongoose.model('User', userSchema, "user");
+const User = mongoose.model('user', userSchema);
 
 module.exports = User;
