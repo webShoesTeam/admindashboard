@@ -216,3 +216,42 @@ exports.test = (req, res) => {
     })
 
 }
+
+exports.top10Products = async (req, res) => {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const years = [year-3, year-2, year-1, year];
+    const orders = await analysisService.findBillsAllYear();
+
+    var products = {};
+    for (let i=0; i<orders.length; i++) { 
+        orders[i].products.forEach(element => {
+            const idProduct = element.item._id
+            if (typeof products[idProduct] == "undefined") products[idProduct] = Number(0);
+            products[idProduct]+= Number(element.totalMoney);
+        });
+        
+    }
+
+    console.log(JSON.stringify(products));
+    const result = Object.keys(products)
+                            .sort((a, b) => products[a] - products[b])
+                            .reduce(
+                            (_sortedObj, key) => ({
+                                ..._sortedObj,
+                                [key]: products[key]
+                            }),
+                            {}
+                            );
+    console.log(JSON.stringify(result));
+
+    for (const property in result) {
+        console.log(`${property}: ${result[property]}`);
+    }
+
+    // res.render('analysis/curveChart', {
+    //     titleChart: JSON.stringify("Total sale in 4 closest years"),
+    //     dataArray: JSON.stringify(x),
+    // })
+    
+}
