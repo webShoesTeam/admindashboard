@@ -14,6 +14,8 @@ router.get('/year', analysisController.getTotalOrderIn4Year);
 
 router.get('/season', analysisController.getTotalOrderInSeason);
 
+router.get('/top', analysisController.top10Products);
+
 router.get('/test', analysisController.test);
 module.exports = router;
 

@@ -1,0 +1,53 @@
+
+
+
+
+<div class="product-status mg-b-30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-status-wrap">
+                    <h4>Products List</h4>
+                    <div class="add-product">
+                        <a href="/product/pageadd">Add Product</a>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Detail</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Size</th>
+                            <th>Color</th>
+                            <th>Setting</th>
+                        </tr>
+                        {{#each products}}
+                        <tr>
+                            <td><img src="https://res.cloudinary.com/dgci6plhk/image/upload/images/{{this._id}}/{{this.nameImage}}.jpg" alt="" /></td>
+                            <td> {{this.name}} </td>
+                            <td>{{this.detail}}</td>
+                            <td>{{this.category}}</td>
+                            <td>{{this.price}}</td>
+                            <td>{{this.size}}</td>
+                            <td>{{this.color}}</td>
+                            <td>
+                                        {{!-- <button data-toggle="tooltip" title="Edit" class="edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                        <button data-toggle="tooltip" title="Delete" class="delete" data-doc="{{this._id}}"><i class="fa fatrash--o" aria-hidden="true"></i></button> --}}
+                                <a data-toggle="tooltip" title="Edit" class="edit" href="/product/edit/{{this._id}}">Edit</a>
+                                <a data-toggle="tooltip" title="Edit" class="edit" href="/product/gallery/{{this._id}}">Add Gallery</a>
+                                <a data-toggle="tooltip" title="Delete" class="delete" href="/product/delete/{{this._id}}">Delete</a>
+                            </td>
+
+                        </tr>
+                        {{/each}}
+                    </table>
+
+                    
+                    <script src= "/js/paginate/list.js"></script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
