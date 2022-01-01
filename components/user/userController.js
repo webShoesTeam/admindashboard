@@ -13,42 +13,35 @@ cloudinary.config({
 
 exports.getProfile = (req, res) => {
     console.log("\n\n\nuser: " + JSON.stringify(req.user));
+    let wrongPassword = req.query['error'] !== undefined;
+    if (wrongPassword) {
+        wrongPassword = req.query.error;
+    }
     res.render('profile', {
         title: "Profile",
-    
+        messError: wrongPassword,
     })
 }
 
 exports.updateImage = async (req, res) => {
     const id = req.params.id;
-    console.log("id:\n\n\n\n " + id)
     const user = await userService.findById(id);
-    //console.log("user find by id:\n\n" + JSON.stringify(user));
-    
     const form = formidable({});
     form.parse(req, async (err, fields, files) => {
         
         console.log("i'm here");
         if (user) {
-            console.log("file: \n\n" + JSON.stringify(files));
-            console.log("field: \n\n" + JSON.stringify(fields));
-            cloudinary.uploader.upload(files.image.filepath, { public_id: `admin/${user._id}/${user.username}`,overwrite: true, width: 192, height: 192, crop: "scale", fetch_format: "jpg"})
+            let newLink
+            await cloudinary.uploader.upload(files.image.filepath, { public_id: `admin/${user._id}/${files.image.newFilename}`,overwrite: true, width: 192, height: 192, crop: "scale", fetch_format: "jpg"}, function(err, result) {
+                newLink = result.url;
+            })
             
-            const newLink = "https://res.cloudinary.com/dgci6plhk/image/upload/v1638968024/admin/" + user._id + "/" + user.username + ".jpg";
+            //newLink = "https://res.cloudinary.com/dgci6plhk/image/upload/v1638968024/admin/" + user._id + "/" + user.username + ".jpg";
             //const newLink = "https://res.cloudinary.com/mernteam/image/upload/v1638468308/mern/users/" + user._id + "/" + user.nameImage + ".jpg"
-            userService.updateImage(newLink, id);
+            await userService.updateImage(newLink, id);
             
             res.redirect('/users/profile');
         }
-        
-        // // res.redirect('/users/profile');
-        // console.log("file: \n\n" + JSON.stringify(files));
-        // console.log("field: \n\n" + JSON.stringify(fields));
-    
-        // const user = User.findOne({_id: id})
-        // console.log("USER: \n\n" + user);
-        // res.redirect("/users/profile")
-
     })
 };
 
@@ -66,11 +59,12 @@ exports.saveUpdate = async (req, res) => {
     const address = await req.body.address;
 
     if (password !== password2) {
-        console.log("Password do not match");
-        res.render('profile', {
-            title: "profile",
-        });
-        return;
+        // console.log("Password do not match");
+        // res.render('profile', {
+        //     title: "profile",
+        // });
+        res.redirect("/users/profile?error=wrong confirm password");
+        //return;
     }
 
     check('name', 'Name is required!').notEmpty();
@@ -92,16 +86,18 @@ exports.saveUpdate = async (req, res) => {
         const emailFound = await userService.findByEmail(email);
 
         if (usernameFound && (id != usernameFound._id)) {
-            res.render('profile', {
-                title: "profile",
-                errors: "Username or email existed",
-            });
+            // res.render('profile', {
+            //     title: "profile",
+            //     errors: "Username or email existed",
+            // });
+            res.redirect('/users/profile?error=this username existed');
         }
         else if (emailFound && (id != emailFound._id)) {
-            res.render('profile', {
-                title: "profile",
-                errors: "Username or email existed",
-            });
+            // res.render('profile', {
+            //     title: "profile",
+            //     errors: "Username or email existed",
+            // });
+            res.redirect('/users/profile?error=this email existed');
         }
         else {
             try {
