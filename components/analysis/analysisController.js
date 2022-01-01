@@ -1,5 +1,5 @@
 const analysisService = require('./analysisService');
-
+const productService = require('../product/productService');
 
 exports.getTotalOrderInOneMonth = async (req, res) => {
     const currentDate = new Date();
@@ -10,8 +10,7 @@ exports.getTotalOrderInOneMonth = async (req, res) => {
     if ((year % 4 == 0) && ((year % 100 != 0)) || (year % 400 == 0)) {
         maxDayInMonth[2] = 29;
     }
-    // console.log("month: " + month);
-    // console.log("max day: " + maxDay);
+
     const orders = await analysisService.findBillsOneMonth(maxDay, month, year);
 
     var x = Array.from(Array(maxDay), _ => Array(5).fill(0));
@@ -108,7 +107,7 @@ exports.getTotalOrderIn4Year = async (req, res) => {
             }
         }
         x[index][4] += total;
-        console.log("index: " + index);
+
         orders[i].products.forEach(element => {
             if (element.item.category == "Men") {
                 x[index][1] += element.totalMoney;
@@ -122,8 +121,6 @@ exports.getTotalOrderIn4Year = async (req, res) => {
 
     }
 
-    console.log(JSON.stringify(x));
-
     res.render('analysis/curveChart', {
         titleChart: JSON.stringify("Total sale in 4 closest years"),
         dataArray: JSON.stringify(x),
@@ -135,7 +132,7 @@ exports.getTotalOrderInSeason = async (req, res) => {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     
-    const orders = await analysisService.findBillsAllYear();
+    const orders = await analysisService.findBillsOneYear(year);
 
     var x = Array.from(Array(4), _ => Array(5).fill(0));
     x[0][0] = "I";
@@ -210,7 +207,6 @@ exports.test = (req, res) => {
         [14,  4.2,  6.2,  3.4, 10]
 
     ]
-    console.log("\n\ntesst")
     res.render('analysis/test', {
         dataArray: JSON.stringify(data),
     })
@@ -233,9 +229,9 @@ exports.top10Products = async (req, res) => {
         
     }
 
-    console.log(JSON.stringify(products));
+    // console.log(JSON.stringify(products));
     const result = Object.keys(products)
-                            .sort((a, b) => products[a] - products[b])
+                            .sort((a, b) => products[b] - products[a])
                             .reduce(
                             (_sortedObj, key) => ({
                                 ..._sortedObj,
@@ -243,15 +239,25 @@ exports.top10Products = async (req, res) => {
                             }),
                             {}
                             );
-    console.log(JSON.stringify(result));
+    // console.log(JSON.stringify(result));
 
+    let top = [];
+    let d = 0;
     for (const property in result) {
-        console.log(`${property}: ${result[property]}`);
+        // console.log(`${property}: ${result[property]}`);
+        let p = await productService.findProductById(property);
+        if (p) {
+            // console.log("price: " + p.price)
+            p["quantity"] = result[property] / (p.price);
+            p["total"] = result[property];
+            top.push(p);
+            d++;
+        }
+        if (d==10) break;
     }
 
-    // res.render('analysis/curveChart', {
-    //     titleChart: JSON.stringify("Total sale in 4 closest years"),
-    //     dataArray: JSON.stringify(x),
-    // })
+    res.render('analysis/topProduct', {
+        products: top,
+    })
     
 }
