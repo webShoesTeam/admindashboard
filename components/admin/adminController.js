@@ -25,5 +25,6 @@ exports.isBanned = async function(req, res) {
   }
   else {
     res.redirect('/admin');
+    //Todo: alert()
   }
 };
