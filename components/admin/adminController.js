@@ -11,3 +11,19 @@ exports.list = async function(req, res) {
         pages: Math.ceil(count / perPage)
       });
 };
+
+exports.isBanned = async function(req, res) {
+  const id = req.params.id;
+  const user = req.user;
+
+  console.log(user._id);
+  console.log(id);
+
+  if (id.localeCompare(user._id) != 0) {
+    await adminListService.findByIdAndUpdate(id);
+    res.redirect('/admin');
+  }
+  else {
+    res.redirect('/admin');
+  }
+};
