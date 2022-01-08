@@ -41,9 +41,8 @@
                             <td>{{this.email}}</td>
                             <td>{{this.phone}}</td>
                             <td>{{this.address}}</td>
-                            {{!-- <td>{{this.isBanned}}</td> --}}
                             <td>
-                            <a title="Edit" class="edit" href="/customer/isbanned/{{this._id}}">{{this.isBanned}}</a>
+                            <a title="Edit" class="edit" id= "is_ban_customer" href="/customer/isbanned/{{this._id}}">{{this.isBanned}}</a>
                             </td>
                         </tr>
                         {{/each}}

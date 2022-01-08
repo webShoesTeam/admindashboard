@@ -97,6 +97,30 @@
         easingType: 'linear',
         scrollSpeed: 900,
         animation: 'fade'
-    }); 	   
+    }); 
+	
+	//isBanAdmin
+	$('body').on('click', '#is_ban_admin', function(event){
+		event.preventDefault();
+		var page = $(this).attr("href");
+		var edit = $(this)
+		$.get(page,function (data){
+			if(data.success){
+				edit.text(`${data.isBan}`);
+			}
+			else{
+				alert("Bạn không thể khóa chính mình")
+			}
+		})
+	})
+
+	$('body').on('click', '#is_ban_customer', function(event){
+		event.preventDefault();
+		var page = $(this).attr("href");
+		var edit = $(this)
+		$.get(page,function (data){
+			edit.text(`${data.isBan}`);
+		})
+	})
  
 })(jQuery); 

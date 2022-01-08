@@ -18,5 +18,6 @@ exports.findByIdAndUpdate = async (id) => {
     if (admin) {
         admin.isBanned = !admin.isBanned;
         await admin.save();
+        return admin.isBanned;
     }
 }
