@@ -47,8 +47,10 @@ exports.count4 = (sizes,colors,cate,sort,search) => {
     .sort({'price': sort})
 }
 
-
-
+exports.findProductWithSlug = async (slug) => {
+    const pro = await Product.findOne({slug: slug});
+    return pro;
+}
 
 exports.findProductById = async (id) => {
     const pro = await Product.findById({_id: id});
@@ -59,4 +61,26 @@ exports.updateImageGallery = async (newLinks, product) => {
     product.galleryImageLinks = newLinks;
     await product.save();
    
+}
+
+exports.updateProduct = async (id, fields) => {
+    await Product.findByIdAndUpdate(id, fields);
+
+}
+
+exports.updateImage = async (newLink, id) => {
+    const product = await Product.findOne({
+        _id: id
+    });
+    if (product) {
+        product.nameImage = newLink;
+        await product.save();
+    }
+}
+
+exports.createNewProduct = async (pro) => {
+    const product = await new Product(pro);
+    
+    await product.save();
+    return product
 }

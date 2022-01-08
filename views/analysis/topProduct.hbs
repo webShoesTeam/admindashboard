@@ -21,7 +21,8 @@
                         </tr>
                         {{#each products}}
                         <tr>
-                            <td><img src="https://res.cloudinary.com/dgci6plhk/image/upload/images/{{this._id}}/{{this.nameImage}}.jpg" alt="" /></td>
+                            {{!-- <td><img src="https://res.cloudinary.com/dgci6plhk/image/upload/images/{{this._id}}/{{this.nameImage}}.jpg" alt="" /></td> --}}
+                            <td><img src="{{this.nameImage}}" alt="" /></td>
                             <td> {{this.name}} </td>
                             <td>{{this.detail}}</td>
                             <td>{{this.category}}</td>
