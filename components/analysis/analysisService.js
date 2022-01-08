@@ -5,8 +5,8 @@ const Bill = require('../../models/billModel');
 
 
 exports.findBillsOneMonth = async (maxDay, month, year) => {
-    console.log(new Date(year, month, 1))
-    console.log(new Date(year, month, maxDay))
+    // console.log(new Date(year, month, 1))
+    // console.log(new Date(year, month, maxDay))
 
     // const orders = await Bill.find({createdAt: {
     //     $gte: new Date(year, month, 1), 
@@ -29,11 +29,11 @@ exports.findBillsOneMonth = async (maxDay, month, year) => {
     //     {$match: { day: 15}}
     // ]);
 
-    for (let i=0; i<orders.length; i++) {
-        console.log("order2" + i + "\n\n")
-        console.log(JSON.stringify(orders[i]));
+    // for (let i=0; i<orders.length; i++) {
+    //     console.log("order2" + i + "\n\n")
+    //     console.log(JSON.stringify(orders[i]));
         
-    }
+    // }
     
     return orders;
 

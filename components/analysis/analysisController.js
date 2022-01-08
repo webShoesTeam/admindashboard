@@ -146,10 +146,15 @@ exports.getTotalOrderInSeason = async (req, res) => {
         // const day = orders[i].day;
         const y = orders[i].year;
         var index;
-        if (orders.month <4) index=0;
-        else if (orders.month <7) index=1;
-        else if (orders.month <10) index=2;
-        else index=3;
+        if (orders[i].month <4) {
+            index=0;
+        } else if (orders[i].month <7) {
+            index=1;
+        } else if (orders[i].month <10) {
+            index=2;
+        } else {
+            index=3;
+        }
         x[index][4] += total;
         
         orders[i].products.forEach(element => {
