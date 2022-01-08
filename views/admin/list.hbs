@@ -43,14 +43,8 @@
                             <td>{{this.email}}</td>
                             <td>{{this.phone}}</td>
                             <td>{{this.address}}</td>
-                            {{!-- <td>
-                                <button data-toggle="tooltip" title="Edit" class="edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                <button data-toggle="tooltip" title="Delete" class="delete" data-doc="{{this._id}}"><i class="fa fatrash--o" aria-hidden="true"></i></button>
-                                <a data-toggle="tooltip" title="Edit" class="edit" href="/productlist/edit/{{this._id}}">Edit</a>
-                                <a data-toggle="tooltip" title="Delete" class="delete" href="/productlist/delete/{{this._id}}">Delete</a>
-                            </td> --}}
                             <td>
-                                <a title="Edit" class="edit" href="/admin/isbanned/{{this._id}}">{{this.isBanned}}</a>
+                                <a title="Edit" class="edit" id= "is_ban_admin" href="/admin/isbanned/{{this._id}}">{{this.isBanned}}</a>
                             </td>
                             </tr>
                         {{/each}}

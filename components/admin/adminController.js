@@ -18,13 +18,16 @@ exports.isBanned = async function(req, res) {
 
   console.log(user._id);
   console.log(id);
-
+  var data = {
+    "success": true,
+    "isBan": true
+  };
   if (id.localeCompare(user._id) != 0) {
-    await adminListService.findByIdAndUpdate(id);
-    res.redirect('/admin');
+    data.isBan = await adminListService.findByIdAndUpdate(id);
+    res.status(201).json(data);
   }
   else {
-    res.redirect('/admin');
-    //Todo: alert()
+    data.success = false;
+    res.status(201).json(data);
   }
 };
