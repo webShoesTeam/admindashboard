@@ -12,43 +12,44 @@ cloudinary.config({
   });
 
 exports.getProfile = (req, res) => {
-    console.log("\n\n\nuser: " + JSON.stringify(req.user));
+    let mess = req.query.mess !== undefined;
+    if (mess) {
+        mess = req.query.mess;
+    }
+    let success = req.query.success !== undefined;
+    if (success) {
+        success = req.query.success;
+    }
     res.render('profile', {
         title: "Profile",
-    
+        mess: mess,
+        success: success,
     })
 }
 
 exports.updateImage = async (req, res) => {
     const id = req.params.id;
-    console.log("id:\n\n\n\n " + id)
     const user = await userService.findById(id);
-    //console.log("user find by id:\n\n" + JSON.stringify(user));
-    
     const form = formidable({});
     form.parse(req, async (err, fields, files) => {
-        
-        console.log("i'm here");
-        if (user) {
-            console.log("file: \n\n" + JSON.stringify(files));
-            console.log("field: \n\n" + JSON.stringify(fields));
-            cloudinary.uploader.upload(files.image.filepath, { public_id: `admin/${user._id}/${user.username}`,overwrite: true, width: 192, height: 192, crop: "scale", fetch_format: "jpg"})
-            
-            const newLink = "https://res.cloudinary.com/dgci6plhk/image/upload/v1638968024/admin/" + user._id + "/" + user.username + ".jpg";
-            //const newLink = "https://res.cloudinary.com/mernteam/image/upload/v1638468308/mern/users/" + user._id + "/" + user.nameImage + ".jpg"
-            userService.updateImage(newLink, id);
-            
-            res.redirect('/users/profile');
+        if (files.image.originalFilename.indexOf('jpg') === -1 && files.image.originalFilename.indexOf('png') === -1 && files.image.originalFilename.indexOf('jpeg') === -1  &&
+                  files.image.originalFilename.indexOf('JPG') === -1 && files.image.originalFilename.indexOf('PNG') === -1 && files.image.originalFilename.indexOf('JPEG') === -1 ) {
+            res.redirect('/users/profile?mess=please upload png/jpg/jpeg image');
+        } 
+        else if (files.image.originalFilename) {
+            if (user) {
+                let newLink
+                await cloudinary.uploader.upload(files.image.filepath, { public_id: `admin/${user._id}/${files.image.newFilename}`,overwrite: true, width: 192, height: 192, crop: "scale", fetch_format: "jpg"}, function(err, result) {
+                    newLink = result.url;
+                })
+                
+                //newLink = "https://res.cloudinary.com/dgci6plhk/image/upload/v1638968024/admin/" + user._id + "/" + user.username + ".jpg";
+                //const newLink = "https://res.cloudinary.com/mernteam/image/upload/v1638468308/mern/users/" + user._id + "/" + user.nameImage + ".jpg"
+                await userService.updateImage(newLink, id);
+                
+                res.redirect('/users/profile?success=update image successful');
+            }
         }
-        
-        // // res.redirect('/users/profile');
-        // console.log("file: \n\n" + JSON.stringify(files));
-        // console.log("field: \n\n" + JSON.stringify(fields));
-    
-        // const user = User.findOne({_id: id})
-        // console.log("USER: \n\n" + user);
-        // res.redirect("/users/profile")
-
     })
 };
 
@@ -65,52 +66,49 @@ exports.saveUpdate = async (req, res) => {
     const password2 = await req.body.password2;
     const address = await req.body.address;
 
-    if (password !== password2) {
-        console.log("Password do not match");
-        res.render('profile', {
-            title: "profile",
-        });
-        return;
-    }
-
-    check('name', 'Name is required!').notEmpty();
-    check('email', 'Email is required!').isEmail();
-    check('phone', 'Email is required!').notEmpty();
-    check('address', 'Email is required!').notEmpty();
-    check('username', 'Username is required!').notEmpty();
-    check('password', 'Password is required!').notEmpty();
-    // check('password2', 'Passwords do not match!').equals(password);
-
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-        console.log("loi empty validation");
-        res.redirect("/users/profile");
-    }
+    if (name == "" || email == "" || username == "" || password == "" || password2 == "" || address == "" || phone == "") {
+        res.redirect('/users/profile?mess=Please enter full information')
+    } 
     else {
-        const usernameFound = await userService.findByUsername(username);
-        const emailFound = await userService.findByEmail(email);
-
-        if (usernameFound && (id != usernameFound._id)) {
-            res.render('profile', {
-                title: "profile",
-                errors: "Username or email existed",
-            });
+        const isRightPass = await userService.validPassword(password, req.user);
+        if (!isRightPass) {
+            res.redirect('/users/profile?mess=wrong password');
         }
-        else if (emailFound && (id != emailFound._id)) {
-            res.render('profile', {
-                title: "profile",
-                errors: "Username or email existed",
-            });
+        else if (password !== password2) {
+            // console.log("Password do not match");
+            // res.render('profile', {
+            //     title: "profile",
+            // });
+            res.redirect("/users/profile?mess=wrong confirm password");
+            //return;
         }
         else {
-            try {
-                await userService.updateUser(id, name, email, phone, address, username, password);
-                //console.log("body: \n" + JSON.stringify(req.body));
-                // res.locals.messages = "Update successfull"
-                res.redirect('/users/profile');
-            } catch (Exception) {
-                res.redirect('/users/profile');
+            const usernameFound = await userService.findByUsername(username);
+            const emailFound = await userService.findByEmail(email);
+
+            if (usernameFound && (id != usernameFound._id)) {
+                // res.render('profile', {
+                //     title: "profile",
+                //     errors: "Username or email existed",
+                // });
+                res.redirect('/users/profile?mess=this username existed');
+            }
+            else if (emailFound && (id != emailFound._id)) {
+                // res.render('profile', {
+                //     title: "profile",
+                //     errors: "Username or email existed",
+                // });
+                res.redirect('/users/profile?mess=this email existed');
+            }
+            else {
+                try {
+                    await userService.updateUser(id, name, email, phone, address, username, password);
+                    //console.log("body: \n" + JSON.stringify(req.body));
+                    // res.locals.messages = "Update successfull"
+                    res.redirect('/users/profile?success=update successful');
+                } catch (Exception) {
+                    res.redirect('/users/profile?mess=something wrong');
+                }
             }
         }
     }

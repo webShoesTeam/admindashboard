@@ -19,5 +19,6 @@ router.get('/cart',productController.productCart);
 router.get('/payment',productController.productPayment);
 router.get('/gallery/:id', productController.getGallery);
 router.post('/gallery/:id', productController.postGallery);
+router.get('/gallery/remove/:id', productController.postRemoveGallery);
 
 module.exports = router;

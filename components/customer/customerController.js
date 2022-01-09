@@ -14,8 +14,11 @@ exports.list = async function(req, res) {
 
 exports.isBanned = async function(req, res) {
   const id = req.params.id;
+  var data = {
+    "isBan": true
+  };
 
-  await customerService.findByIdAndUpdate(id);
-  res.redirect('/customer');
+  data.isBan = await customerService.findByIdAndUpdate(id);
+  res.status(201).json(data);
 };
 

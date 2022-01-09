@@ -87,7 +87,8 @@
                         </tr>
                         {{#each products}}
                         <tr>
-                            <td><img src="https://res.cloudinary.com/dgci6plhk/image/upload/images/{{this._id}}/{{this.nameImage}}.jpg" alt="" /></td>
+                            {{!-- <td><img src="https://res.cloudinary.com/dgci6plhk/image/upload/images/{{this._id}}/{{this.nameImage}}.jpg" alt="" /></td> --}}
+                            <td><img src="{{this.nameImage}}" alt="img" /></td>
                             <td> {{this.name}} </td>
                             <td>{{this.detail}}</td>
                             <td>{{this.category}}</td>
@@ -108,127 +109,16 @@
 
                     <div class="custom-pagination">
                         <ul class="pagination" id="listpage">
+                        <input type= "hidden" name="current" id="current" value="{{current}}">
+                        <input type= "hidden" name="pages" id="pages" value="{{pages}}">
+                        <input type= "hidden" name="sizes" id="sizes" value="{{sizes}}">
+                        <input type= "hidden" name="colors" id="colors" value="{{colors}}">
+                        <input type= "hidden" name="category" id="category" value="{{category}}">
+                        <input type= "hidden" name="category" id="colors" value="{{category}}">
+                        <input type= "hidden" name="sort" id="sort" value="{{sort}}">
                         </ul>
                     </div>
-                    <script>
-
-                        var strBegin = ""
-                        if( window.location.href.search("page") != -1){
-                            strBegin = window.location.href.substring(window.location.href.search("/product"), window.location.href.search("page")).replace("?","")
-                        }
-                        else{
-                            strBegin =window.location.href.substring(window.location.href.search("/product"))
-                        }
-                        var strEnd = ""
-                        if("{{sizes}}" != 0){
-                            strEnd += `&size={{sizes}}`
-                        }
-                        if("{{colors}}" != 0){
-                            strEnd += `&color={{colors}}`
-                        }
-                        if("{{category}}" != 0){
-                            strEnd += `&category={{category}}`
-                        }
-                        if("{{sort}}" != 0){
-                            strEnd += `&sort={{sort}}`
-                        }
-                        if(strEnd == "&sort=-1") {
-                            strEnd = ""
-                        }
-                        strBegin += "?page="
-                        var uList = document.getElementById("listpage");
-                        var numPage = 3;
-                        var i = 1;  
-                        var tagLi = document.createElement("li");
-                        var link = document.createElement("a");
-                        link.className = "listpaginate";
-                        if({{current}} == null){
-                            {{current}} == 1
-                        }
-                        //
-                        if({{current}} >= 3){
-                            i = {{current}} - 2;
-                        }
-
-                        // <
-                        if({{current}} == 1){
-                            link.href  = "#";
-                            link.textContent = "<";
-                        }
-                        else{
-                            var s = {{current}} - 1
-                            link.href  = strBegin+ s + strEnd;
-                            link.textContent = "<";
-                        }
-                        tagLi.appendChild(link);
-                        uList.appendChild(tagLi);
-
-                        //center
-                        
-                        for(;i <= {{current}} + 2 && i <= {{pages}};i++){
-                        tagLi = document.createElement("li");
-                        link = document.createElement("a");
-                        link.className = "listpaginate";
-                        if(i == {{current}}){
-                            tagLi.classList.add('active')
-                            link = document.createElement("span");
-                            link.textContent = i;
-                        }
-                        else{
-                            link.href = strBegin + i + strEnd;
-                            link.textContent = i;
-                        }
-                        tagLi.appendChild(link);
-                        uList.appendChild(tagLi); 
-                        }
-
-
-                        // >
-                        tagLi = document.createElement("li");
-                        link = document.createElement("a");
-                        link.className = "listpaginate";
-                        if ({{current}} == {{pages}}) {
-                            link.href  = "#";
-                            link.textContent = ">";
-                        }
-                        else{
-                            var s = {{current}} + 1
-                            link.href = strBegin + s + strEnd;
-                            link.textContent = ">";
-                        }
-                        tagLi.appendChild(link);
-                        uList.appendChild(tagLi); 
-
-                        var options = document.getElementById("select-size").options;
-                        for (var i = 0; i < options.length; i++) {
-                            if (options[i].text == "{{sizes}}") {
-                                options[i].selected = true;
-                                break;
-                            }
-                        }
-                        var options = document.getElementById("select-color").options;
-                        for (var i = 0; i < options.length; i++) {
-                            if (options[i].text == "{{colors}}") {
-                                options[i].selected = true;
-                                break;
-                            }
-                        }
-                        var options = document.getElementById("select-category").options;
-                        for (var i = 0; i < options.length; i++) {
-                            if (options[i].text == "{{category}}") {
-                                options[i].selected = true;
-                                break;
-                            }
-                        }
-                        var options = document.getElementById("select-sort").options;
-                        for (var i = 0; i < options.length; i++) {
-                            if (options[i].value == "{{sort}}") {
-                                options[i].selected = true;
-                                break;
-                            }
-                        }
-
-                    </script>
+                    <script src= "/js/paginate/list.js"></script>
                 </div>
             </div>
         </div>

@@ -37,7 +37,11 @@ const adminSchema = mongoose.Schema({
     type: String,
     default: 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png',
   },
-
+  
+  isBanned: {
+    type: Boolean,
+    default: false
+  },
 });
 
 const Admin = mongoose.model('Admin', adminSchema, "admin");
