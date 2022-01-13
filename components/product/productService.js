@@ -2,10 +2,11 @@ const Product = require('../../models/productModel');
 
 exports.list = () => Product.find();
 
-exports.list = (page,perPage) => {
+exports.list = (page,perPage,sort) => {
     return Product.find()
     .skip((perPage * page) - perPage)
     .limit(perPage)
+    .sort({'price': sort})
 }
 
 exports.search = (sizes,colors,page,perPage,sort,search) =>{
