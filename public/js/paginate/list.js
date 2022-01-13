@@ -98,28 +98,28 @@ uList.appendChild(tagLi);
 
 var options = document.getElementById("select-size").options;
 for (var i = 0; i < options.length; i++) {
-    if (options[i].text == "{{sizes}}") {
+    if (options[i].text == sizes) {
         options[i].selected = true;
         break;
     }
 }
 var options = document.getElementById("select-color").options;
 for (var i = 0; i < options.length; i++) {
-    if (options[i].text == "{{colors}}") {
+    if (options[i].text == colors) {
         options[i].selected = true;
         break;
     }
 }
 var options = document.getElementById("select-category").options;
 for (var i = 0; i < options.length; i++) {
-    if (options[i].text == "{{category}}") {
+    if (options[i].text == category) {
         options[i].selected = true;
         break;
     }
 }
 var options = document.getElementById("select-sort").options;
 for (var i = 0; i < options.length; i++) {
-    if (options[i].value == "{{sort}}") {
+    if (options[i].value == sort) {
         options[i].selected = true;
         break;
     }
