@@ -18,8 +18,7 @@ exports.list = async function(req, res) {
     const perPage = 6;
     const page = req.query.page || 1;
     const count = await productListService.count();
-    const products = await productListService.list(page,perPage);
-
+    const products = await productListService.list(page,perPage,-1);
     res.render('product/list', {
         products,
         sizes: 0,
@@ -99,7 +98,17 @@ exports.filter = async function(req, res) {
 
     }
     else{
-        res.redirect('/product');
+        const count = await productListService.count();
+        const products = await productListService.list(page,perPage,sort);
+        res.render('product/list', {
+            products,
+            sizes: 0,
+            colors: 0,
+            category: 0,
+            sort: sort,
+            current: page,
+            pages: Math.ceil(count / perPage)
+          });
     }
 };
 
@@ -171,7 +180,17 @@ exports.filterGet = async function(req, res) {
 
     }
     else{
-        res.redirect('/product');
+        const count = await productListService.count();
+        const products = await productListService.list(page,perPage,sort);
+        res.render('product/list', {
+            products,
+            sizes: 0,
+            colors: 0,
+            category: 0,
+            sort: sort,
+            current: page,
+            pages: Math.ceil(count / perPage)
+          });
     }
 };
 
